@@ -93,6 +93,7 @@
     <Compile Include="FacebookAuthenticationManager.cs">
       <ExcludeFromStyleCop>False</ExcludeFromStyleCop>
     </Compile>
+    <Compile Include="FeatureFactory.cs" />
     <Compile Include="FormMain.cs">
       <SubType>Form</SubType>
     </Compile>
