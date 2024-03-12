@@ -7,8 +7,8 @@ namespace BasicFacebookFeatures
 {
     internal partial class FormMain : Form
     {
-        private FacebookAuthenticationManager m_FacebookAuthenticationManager = FacebookAuthenticationManager.Instance;
         private User m_User;
+        private FeatureFactory m_FeatureFactory;
         private RandomSelector m_RandomSelector;
         private PostAnalyzer m_PostAnalyzer;
         private Post m_PostToGuess;
@@ -29,8 +29,10 @@ namespace BasicFacebookFeatures
                 if (FacebookAuthenticationManager.Instance.Login("749307766594184", "email", "public_profile", "user_posts", "user_birthday", "user_friends"))
                 {
                     m_User = FacebookAuthenticationManager.Instance.m_LoggedInUser;
-                    m_RandomSelector = new RandomSelector(m_User);
-                    m_PostAnalyzer = new PostAnalyzer(m_User);
+                    m_FeatureFactory = new FeatureFactory(m_User);
+
+                    m_RandomSelector = m_FeatureFactory.CreateRandomSelector();
+                    m_PostAnalyzer = m_FeatureFactory.CreatePostAnalyzer();
                     buttonLogin.Text = $"Logged in as {m_User.Name}";
                     buttonLogin.BackColor = Color.LightGreen;
                     enableButtonsAfterLogin();
@@ -65,8 +67,8 @@ namespace BasicFacebookFeatures
 
         private void buttonBirthdayCounter_Click(object sender, EventArgs e)
         {
-            BirthdayFeature birthday = new BirthdayFeature(m_User.Birthday);
-            TimeSpan timeSpan = birthday.TimeToBirhtday();
+            BirthdayFeature birthdayFeature = m_FeatureFactory.CreateBirthdayFeature(m_User.Birthday);
+            TimeSpan timeSpan = birthdayFeature.TimeToBirhtday();
 
             labelBirthdayCountdown.Visible = true;
             labelBirthdayCountdown.Text = $"Time until next birthday: {timeSpan.Days} days, {timeSpan.Hours} hours, {timeSpan.Minutes} minutes.";
