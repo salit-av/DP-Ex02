@@ -7,7 +7,7 @@ namespace BasicFacebookFeatures
 {
     internal partial class FormMain : Form
     {
-        private FacebookAuthenticationManager m_FacebookAuthenticationManager = new FacebookAuthenticationManager();
+        private FacebookAuthenticationManager m_FacebookAuthenticationManager = FacebookAuthenticationManager.Instance;
         private User m_User;
         private RandomSelector m_RandomSelector;
         private PostAnalyzer m_PostAnalyzer;
@@ -24,11 +24,11 @@ namespace BasicFacebookFeatures
 
         private void buttonLogin_Click(object sender, EventArgs e)
         {
-            if (m_FacebookAuthenticationManager.m_LoggedInUser == null)
+            if (FacebookAuthenticationManager.Instance.m_LoggedInUser == null)
             {
-                if (m_FacebookAuthenticationManager.Login("749307766594184", "email", "public_profile", "user_posts", "user_birthday", "user_friends"))
+                if (FacebookAuthenticationManager.Instance.Login("749307766594184", "email", "public_profile", "user_posts", "user_birthday", "user_friends"))
                 {
-                    m_User = m_FacebookAuthenticationManager.m_LoggedInUser;
+                    m_User = FacebookAuthenticationManager.Instance.m_LoggedInUser;
                     m_RandomSelector = new RandomSelector(m_User);
                     m_PostAnalyzer = new PostAnalyzer(m_User);
                     buttonLogin.Text = $"Logged in as {m_User.Name}";
@@ -48,7 +48,7 @@ namespace BasicFacebookFeatures
 
         private void buttonLogout_Click(object sender, EventArgs e)
         {
-            m_FacebookAuthenticationManager.Logout();
+            FacebookAuthenticationManager.Instance.Logout();
             buttonLogin.Text = "Login";
             buttonLogin.BackColor = buttonLogout.BackColor;
             disableButtonsAfterLogout();
