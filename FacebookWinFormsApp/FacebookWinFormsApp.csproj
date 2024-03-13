@@ -100,6 +100,7 @@
     <Compile Include="FormMain.Designer.cs">
       <DependentUpon>FormMain.cs</DependentUpon>
     </Compile>
+    <Compile Include="GuessStrategy.cs" />
     <Compile Include="MonthConvertor.cs" />
     <Compile Include="PostAnalyzer.cs" />
     <Compile Include="Program.cs" />

@@ -12,6 +12,7 @@ namespace BasicFacebookFeatures
         private PostAnalyzer m_PostAnalyzer;
         private Post m_PostToGuess;
         private User m_FriendToGuess;
+        private IGuessStrategy m_GuessStrategy;
         private bool m_IsUserGuessedPostYear = false;
         private bool m_IsUserGuessedFriendBirthday = false;
 
@@ -83,6 +84,8 @@ namespace BasicFacebookFeatures
             m_FriendToGuess = m_RandomSelector.GetRandomFriend();
             labelFriendName.Text = (m_FriendToGuess == null) ? "No friends exists!" : m_FriendToGuess.Name;
             visibleFormObjectsOfGuessFriendBirthdayMonth();
+
+            m_GuessStrategy = new GuessBirthdayMonthStrategy(); // Set guess strategy
         }
 
         private void visibleFormObjectsOfGuessFriendBirthdayMonth()
@@ -121,6 +124,8 @@ namespace BasicFacebookFeatures
 
             labelSelectedPost.Text = (m_PostToGuess == null) ? "No posts exists!" : m_PostToGuess.Message;
             labelSelectedPost.ForeColor = Color.Black;
+
+            m_GuessStrategy = new GuessPostYearStrategy(); // Set guess strategy
         }
 
         private void visibleObejctsOfGuessPostYear()
@@ -152,7 +157,9 @@ namespace BasicFacebookFeatures
             if (m_PostToGuess != null)
             {
                 string selectedYearOption = comboBoxGuessPostYear.SelectedItem.ToString();
-                if (selectedYearOption == m_PostToGuess.CreatedTime.Value.Year.ToString())
+                bool isGuessCorrect = m_GuessStrategy.IsGuessCorrect(m_PostToGuess, selectedYearOption);
+
+                if (isGuessCorrect)
                 {
                     labelSelectedPost.Text = "YOUR GUESS IS CORRECT!!!";
                     labelSelectedPost.ForeColor = Color.PaleGreen;
@@ -181,14 +188,14 @@ namespace BasicFacebookFeatures
 
         private void buttonGuessBirthdayMonth_Click(object sender, EventArgs e)
         {
-            MonthConverter monthConvertor = FeatureFactory.CreateMonthConverter();
+            MonthConverter monthConverter = FeatureFactory.CreateMonthConverter();
 
             if (m_FriendToGuess != null)
             {
-                int selectedMonthNumber = monthConvertor.GetMonthNumber(comboBoxGuessBirthdayMonth.SelectedItem.ToString());
-                BirthdayFeature friendBirthday = FeatureFactory.CreateBirthdayFeature(m_FriendToGuess.Birthday);
+                int selectedMonthNumber = monthConverter.GetMonthNumber(comboBoxGuessBirthdayMonth.SelectedItem.ToString());
+                bool isGuessCorrect = m_GuessStrategy.IsGuessCorrect(m_FriendToGuess, selectedMonthNumber);
 
-                if (selectedMonthNumber == friendBirthday.GetBirthdayMonth())
+                if (isGuessCorrect)
                 {
                     labelFriendName.Text = "YOUR GUESS IS CORRECT!!!";
                     labelFriendName.ForeColor = Color.PaleGreen;

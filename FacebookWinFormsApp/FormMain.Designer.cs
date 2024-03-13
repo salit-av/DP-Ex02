@@ -340,7 +340,9 @@
             "2017",
             "2016",
             "2015",
-            "2014"});
+            "2014",
+            "2013",
+            "2012"});
             this.comboBoxGuessPostYear.Location = new System.Drawing.Point(75, 484);
             this.comboBoxGuessPostYear.Name = "comboBoxGuessPostYear";
             this.comboBoxGuessPostYear.Size = new System.Drawing.Size(112, 26);
