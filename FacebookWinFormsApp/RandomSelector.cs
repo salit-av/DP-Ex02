@@ -3,7 +3,7 @@ using FacebookWrapper.ObjectModel;
 
 namespace BasicFacebookFeatures
 {
-    internal class RandomSelector
+    public class RandomSelector
     {
         private User m_User;
         private Random m_Random = new Random();
