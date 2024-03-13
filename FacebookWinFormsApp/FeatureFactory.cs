@@ -9,6 +9,11 @@ namespace BasicFacebookFeatures
             return new RandomSelector(user);
         }
 
+        internal static MonthConverter CreateMonthConverter()
+        {
+            return new MonthConverter();
+        }
+
         internal static BirthdayFeature CreateBirthdayFeature(string birthday)
         {
             return new BirthdayFeature(birthday);

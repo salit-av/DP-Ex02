@@ -181,12 +181,12 @@ namespace BasicFacebookFeatures
 
         private void buttonGuessBirthdayMonth_Click(object sender, EventArgs e)
         {
-            MonthConverter monthConvertor = new MonthConverter();
+            MonthConverter monthConvertor = FeatureFactory.CreateMonthConverter();
 
             if (m_FriendToGuess != null)
             {
                 int selectedMonthNumber = monthConvertor.GetMonthNumber(comboBoxGuessBirthdayMonth.SelectedItem.ToString());
-                BirthdayFeature friendBirthday = new BirthdayFeature(m_FriendToGuess.Birthday);
+                BirthdayFeature friendBirthday = FeatureFactory.CreateBirthdayFeature(m_FriendToGuess.Birthday);
 
                 if (selectedMonthNumber == friendBirthday.GetBirthdayMonth())
                 {

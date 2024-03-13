@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Threading.Tasks;
 using FacebookWrapper.ObjectModel;
 
 namespace BasicFacebookFeatures
@@ -8,35 +7,27 @@ namespace BasicFacebookFeatures
     {
         private User m_User;
 
-        internal PostAnalyzer(User user)
+        internal PostAnalyzer(User i_User)
         {
-            this.m_User = user;
+            this.m_User = i_User;
         }
 
-        internal async Task<int> CountPostsInPeriodAsync(string periodOfTime)
+        internal int CountPostsInPeriod(string i_periodOfTime)
         {
-            // Asynchronously run the counting operation in a task
-            return await Task.Run(() =>
+            int counter = 0;
+            DateTime now = DateTime.Now;
+
+            foreach (Post post in m_User.Posts)
             {
-                int counter = 0;
-                DateTime now = DateTime.Now;
+                DateTime postDate = post.CreatedTime.Value;
 
-                foreach (Post post in m_User.Posts)
+                if (isPostInSelectedPeriod(postDate, i_periodOfTime, now))
                 {
-                    // Check if CreatedTime has a value before trying to access it
-                    if (post.CreatedTime.HasValue)
-                    {
-                        DateTime postDate = post.CreatedTime.Value;
-
-                        if (isPostInSelectedPeriod(postDate, periodOfTime, now))
-                        {
-                            counter++;
-                        }
-                    }
+                    counter++;
                 }
+            }
 
-                return counter;
-            });
+            return counter;
         }
 
         private bool isPostInSelectedPeriod(DateTime postDate, string selectedPeriod, DateTime now)
