@@ -18,10 +18,5 @@ namespace BasicFacebookFeatures
         {
             return new BirthdayFeature(birthday);
         }
-
-        internal static PostAnalyzer CreatePostAnalyzer(User user)
-        {
-            return new PostAnalyzer(user);
-        }
     }
 }
