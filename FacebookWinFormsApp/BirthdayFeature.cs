@@ -18,27 +18,6 @@ namespace BasicFacebookFeatures
             }
         }
 
-        internal TimeSpan TimeToBirhtday() 
-        {
-            DateTime nextBirthday;
-
-            if (r_Month == 2 && r_Day == 29) 
-            {
-                nextBirthday = new DateTime(DateTime.Now.Year, r_Month, 28).AddYears(1);
-            } 
-            else
-            {
-                nextBirthday = new DateTime(DateTime.Now.Year, r_Month, r_Day);
-
-                if (nextBirthday < DateTime.Now) 
-                {
-                    nextBirthday = nextBirthday.AddYears(1);
-                }
-            }
-
-            return nextBirthday - DateTime.Now;
-        }
-
         internal int GetBirthdayMonth()
         {
             return r_Month;
