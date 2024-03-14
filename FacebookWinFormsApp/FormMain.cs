@@ -5,8 +5,6 @@ using FacebookWrapper.ObjectModel;
 
 namespace BasicFacebookFeatures
 {
-    
-
     internal partial class FormMain : Form
     {
         private User m_User;

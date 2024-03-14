@@ -100,9 +100,6 @@
     <Compile Include="FormMain.Designer.cs">
       <DependentUpon>FormMain.cs</DependentUpon>
     </Compile>
-    <Compile Include="FormMain.GuessType.cs">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="GuessFriendBirthdayMonthStrategy.cs" />
     <Compile Include="IGuessStrategy.cs" />
     <Compile Include="GuessPostYearStrategy.cs" />
