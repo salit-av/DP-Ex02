@@ -8,10 +8,9 @@ namespace BasicFacebookFeatures
     internal partial class FormMain : Form
     {
         private User m_User;
-        private RandomSelector m_RandomSelector;
-        private PostAnalyzer m_PostAnalyzer;
-        private Post m_PostToGuess;
         private User m_FriendToGuess;
+        private Post m_PostToGuess;
+        private FeatureFacade m_FeatureFacade;
         private bool m_IsUserGuessedPostYear = false;
         private bool m_IsUserGuessedFriendBirthday = false;
 
@@ -28,9 +27,8 @@ namespace BasicFacebookFeatures
                 if (FacebookAuthenticationManager.Instance.Login("749307766594184", "email", "public_profile", "user_posts", "user_birthday", "user_friends"))
                 {
                     m_User = FacebookAuthenticationManager.Instance.m_LoggedInUser;
+                    m_FeatureFacade = new FeatureFacade(m_User);
 
-                    m_RandomSelector = FeatureFactory.CreateRandomSelector(m_User);
-                    m_PostAnalyzer = FeatureFactory.CreatePostAnalyzer(m_User);
                     buttonLogin.Text = $"Logged in as {m_User.Name}";
                     buttonLogin.BackColor = Color.LightGreen;
                     enableButtonsAfterLogin();
@@ -65,8 +63,7 @@ namespace BasicFacebookFeatures
 
         private void buttonBirthdayCounter_Click(object sender, EventArgs e)
         {
-            BirthdayFeature birthdayFeature = FeatureFactory.CreateBirthdayFeature(m_User.Birthday);
-            TimeSpan timeSpan = birthdayFeature.TimeToBirhtday();
+            TimeSpan timeSpan = m_FeatureFacade.TimeUntilNextBirthday();
 
             labelBirthdayCountdown.Visible = true;
             labelBirthdayCountdown.Text = $"Time until next birthday: {timeSpan.Days} days, {timeSpan.Hours} hours, {timeSpan.Minutes} minutes.";
@@ -80,7 +77,7 @@ namespace BasicFacebookFeatures
 
         private void showGuessBirthdayMonth()
         {
-            m_FriendToGuess = m_RandomSelector.GetRandomFriend();
+            m_FriendToGuess = m_FeatureFacade.GetRandomFriend();
             labelFriendName.Text = (m_FriendToGuess == null) ? "No friends exists!" : m_FriendToGuess.Name;
             visibleFormObjectsOfGuessFriendBirthdayMonth();
         }
@@ -103,7 +100,7 @@ namespace BasicFacebookFeatures
             labelPleaseWait.Text = "Please wait...";
 
             labelNumberOfPostsInPeriodOfTime.Visible = true;
-            labelNumberOfPostsInPeriodOfTime.Text = $"{m_PostAnalyzer.CountPostsInPeriod(selectedPeriodOption)} posts found";
+            labelNumberOfPostsInPeriodOfTime.Text = $"{m_FeatureFacade.CountPostsInPeriod(selectedPeriodOption)} posts found";
 
             labelPleaseWait.Visible = false;
 
@@ -116,7 +113,7 @@ namespace BasicFacebookFeatures
 
         private void showGuessPostYear()
         {
-            m_PostToGuess = m_RandomSelector.GetRandomPost();
+            m_PostToGuess = m_FeatureFacade.GetRandomPost();
             visibleObejctsOfGuessPostYear();
 
             labelSelectedPost.Text = (m_PostToGuess == null) ? "No posts exists!" : m_PostToGuess.Message;
@@ -167,25 +164,23 @@ namespace BasicFacebookFeatures
 
         private void buttonNewPostGuess_Click(object sender, EventArgs e)
         {
-            m_PostToGuess = m_RandomSelector.GetRandomPost();
+            m_PostToGuess = m_FeatureFacade.GetRandomPost();
             labelSelectedPost.ForeColor = Color.Black;
             labelSelectedPost.Text = (m_PostToGuess == null) ? "No posts exists!" : m_PostToGuess.Message;
         }
 
         private void buttonNewBirthdayGuess_Click(object sender, EventArgs e)
         {
-            m_FriendToGuess = m_RandomSelector.GetRandomFriend();
+            m_FriendToGuess = m_FeatureFacade.GetRandomFriend();
             labelFriendName.ForeColor = Color.Black;
             labelFriendName.Text = (m_FriendToGuess == null) ? "No friends exists!" : m_FriendToGuess.Name;
         }
 
         private void buttonGuessBirthdayMonth_Click(object sender, EventArgs e)
         {
-            MonthConverter monthConvertor = FeatureFactory.CreateMonthConverter();
-
             if (m_FriendToGuess != null)
             {
-                int selectedMonthNumber = monthConvertor.GetMonthNumber(comboBoxGuessBirthdayMonth.SelectedItem.ToString());
+                int selectedMonthNumber = m_FeatureFacade.ConvertMonthNumberToInt(comboBoxGuessBirthdayMonth.SelectedItem.ToString());
                 BirthdayFeature friendBirthday = FeatureFactory.CreateBirthdayFeature(m_FriendToGuess.Birthday);
 
                 if (selectedMonthNumber == friendBirthday.GetBirthdayMonth())
