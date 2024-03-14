@@ -27,7 +27,10 @@ namespace BasicFacebookFeatures
                 if (FacebookAuthenticationManager.Instance.Login("749307766594184", "email", "public_profile", "user_posts", "user_birthday", "user_friends"))
                 {
                     m_User = FacebookAuthenticationManager.Instance.m_LoggedInUser;
-                    m_FeatureFacade = new FeatureFacade(m_User);
+                    IBirthdayCountdownStrategy birthdayCountdownStrategy = new SimpleBirthdayCountdownStrategy();
+                    IPostAnalyzerStrategy postAnalyzerStrategy = new SimplePostAnalyzerStrategy();
+
+                    m_FeatureFacade = new FeatureFacade(m_User, birthdayCountdownStrategy, postAnalyzerStrategy);
 
                     buttonLogin.Text = $"Logged in as {m_User.Name}";
                     buttonLogin.BackColor = Color.LightGreen;
@@ -63,7 +66,7 @@ namespace BasicFacebookFeatures
 
         private void buttonBirthdayCounter_Click(object sender, EventArgs e)
         {
-            TimeSpan timeSpan = m_FeatureFacade.TimeUntilNextBirthday();
+            TimeSpan timeSpan = m_FeatureFacade.GetTimeUntilNextBirthday();
 
             labelBirthdayCountdown.Visible = true;
             labelBirthdayCountdown.Text = $"Time until next birthday: {timeSpan.Days} days, {timeSpan.Hours} hours, {timeSpan.Minutes} minutes.";
@@ -180,7 +183,7 @@ namespace BasicFacebookFeatures
         {
             if (m_FriendToGuess != null)
             {
-                int selectedMonthNumber = m_FeatureFacade.ConvertMonthNumberToInt(comboBoxGuessBirthdayMonth.SelectedItem.ToString());
+                int selectedMonthNumber = m_FeatureFacade.ConvertMonthStringToInt(comboBoxGuessBirthdayMonth.SelectedItem.ToString());
                 BirthdayFeature friendBirthday = FeatureFactory.CreateBirthdayFeature(m_FriendToGuess.Birthday);
 
                 if (selectedMonthNumber == friendBirthday.GetBirthdayMonth())

@@ -6,42 +6,41 @@ namespace BasicFacebookFeatures
     internal class FeatureFacade
     {
         private User m_User;
-        private RandomSelector m_RandomSelector;
-        private PostAnalyzer m_PostAnalyzer;
+        private IBirthdayCountdownStrategy m_BirthdayCountdownStrategy;
+        private IPostAnalyzerStrategy m_PostAnalyzerStrategy;
 
-        public FeatureFacade(User user)
+        public FeatureFacade(User user, IBirthdayCountdownStrategy birthdayCountdownStrategy, IPostAnalyzerStrategy postAnalyzerStrategy)
         {
             m_User = user;
-            m_RandomSelector = FeatureFactory.CreateRandomSelector(m_User);
-            m_PostAnalyzer = FeatureFactory.CreatePostAnalyzer(m_User);
+            m_BirthdayCountdownStrategy = birthdayCountdownStrategy;
+            m_PostAnalyzerStrategy = postAnalyzerStrategy;
         }
 
-        public TimeSpan TimeUntilNextBirthday()
+        public TimeSpan GetTimeUntilNextBirthday()
         {
-            BirthdayFeature birthdayFeature = FeatureFactory.CreateBirthdayFeature(m_User.Birthday);
-            
-            return birthdayFeature.TimeToBirhtday();
+            return m_BirthdayCountdownStrategy.GetTimeUntilNextBirthday(m_User.Birthday);
         }
 
         public int CountPostsInPeriod(string period)
         {
-            return m_PostAnalyzer.CountPostsInPeriod(period);
+            return m_PostAnalyzerStrategy.CountPostsInPeriod(period);
         }
 
         public User GetRandomFriend()
         {
-            return m_RandomSelector.GetRandomFriend();
+            RandomSelector randomSelector = FeatureFactory.CreateRandomSelector(m_User);
+            return randomSelector.GetRandomFriend();
         }
 
         public Post GetRandomPost()
         {
-            return m_RandomSelector.GetRandomPost();
+            RandomSelector randomSelector = FeatureFactory.CreateRandomSelector(m_User);
+            return randomSelector.GetRandomPost();
         }
 
-        public int ConvertMonthNumberToInt(string month)
+        public int ConvertMonthStringToInt(string month)
         {
             MonthConverter monthConverter = FeatureFactory.CreateMonthConverter();
-
             return monthConverter.GetMonthNumber(month);
         }
     }

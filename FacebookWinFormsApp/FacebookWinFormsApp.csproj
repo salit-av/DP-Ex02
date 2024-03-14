@@ -103,9 +103,11 @@
     </Compile>
     <Compile Include="MonthConvertor.cs" />
     <Compile Include="PostAnalyzer.cs" />
+    <Compile Include="PostAnalyzerStrategy.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RandomSelector.cs" />
+    <Compile Include="BirthdayFeatureStrategy.cs" />
     <EmbeddedResource Include="FormMain.resx">
       <DependentUpon>FormMain.cs</DependentUpon>
     </EmbeddedResource>
