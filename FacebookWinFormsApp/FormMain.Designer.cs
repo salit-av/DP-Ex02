@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.tabPage = new System.Windows.Forms.TabPage();
             this.labelWinFormTitle = new System.Windows.Forms.Label();
             this.buttonLogout = new System.Windows.Forms.Button();
@@ -43,6 +44,9 @@
             this.labelBirthdayCountdown = new System.Windows.Forms.Label();
             this.buttonBirthdayCountdown = new System.Windows.Forms.Button();
             this.panelPostsData = new System.Windows.Forms.Panel();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.postMessageTextBox = new System.Windows.Forms.TextBox();
+            this.postBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.buttonNewPostGuess = new System.Windows.Forms.Button();
             this.labelPleaseWait = new System.Windows.Forms.Label();
             this.labelSelectedPost = new System.Windows.Forms.Label();
@@ -58,6 +62,8 @@
             this.tabPage.SuspendLayout();
             this.panelBirthday.SuspendLayout();
             this.panelPostsData.SuspendLayout();
+            this.panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.postBindingSource)).BeginInit();
             this.tabControl.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -248,6 +254,7 @@
             // 
             this.panelPostsData.BackColor = System.Drawing.Color.RoyalBlue;
             this.panelPostsData.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panelPostsData.Controls.Add(this.panel1);
             this.panelPostsData.Controls.Add(this.buttonNewPostGuess);
             this.panelPostsData.Controls.Add(this.labelPleaseWait);
             this.panelPostsData.Controls.Add(this.labelSelectedPost);
@@ -263,6 +270,29 @@
             this.panelPostsData.Name = "panelPostsData";
             this.panelPostsData.Size = new System.Drawing.Size(581, 533);
             this.panelPostsData.TabIndex = 65;
+            // 
+            // panel1
+            // 
+            this.panel1.BackColor = System.Drawing.Color.AliceBlue;
+            this.panel1.Controls.Add(this.postMessageTextBox);
+            this.panel1.Location = new System.Drawing.Point(49, 259);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(443, 175);
+            this.panel1.TabIndex = 71;
+            // 
+            // postMessageTextBox
+            // 
+            this.postMessageTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.postBindingSource, "Message", true));
+            this.postMessageTextBox.Location = new System.Drawing.Point(26, 22);
+            this.postMessageTextBox.Multiline = true;
+            this.postMessageTextBox.Name = "postMessageTextBox";
+            this.postMessageTextBox.Size = new System.Drawing.Size(389, 134);
+            this.postMessageTextBox.TabIndex = 1;
+            this.postMessageTextBox.Leave += new System.EventHandler(this.postMessageTextBox_Leave);
+            // 
+            // postBindingSource
+            // 
+            this.postBindingSource.DataSource = typeof(FacebookWrapper.ObjectModel.Post);
             // 
             // buttonNewPostGuess
             // 
@@ -289,9 +319,9 @@
             // labelSelectedPost
             // 
             this.labelSelectedPost.ForeColor = System.Drawing.Color.Black;
-            this.labelSelectedPost.Location = new System.Drawing.Point(72, 258);
+            this.labelSelectedPost.Location = new System.Drawing.Point(177, 449);
             this.labelSelectedPost.Name = "labelSelectedPost";
-            this.labelSelectedPost.Size = new System.Drawing.Size(398, 199);
+            this.labelSelectedPost.Size = new System.Drawing.Size(209, 26);
             this.labelSelectedPost.TabIndex = 68;
             this.labelSelectedPost.Text = "Post";
             this.labelSelectedPost.TextAlign = System.Drawing.ContentAlignment.TopCenter;
@@ -433,6 +463,9 @@
             this.panelBirthday.PerformLayout();
             this.panelPostsData.ResumeLayout(false);
             this.panelPostsData.PerformLayout();
+            this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.postBindingSource)).EndInit();
             this.tabControl.ResumeLayout(false);
             this.ResumeLayout(false);
 
@@ -466,5 +499,8 @@
         private System.Windows.Forms.Label labelPleaseWait;
         private System.Windows.Forms.Button buttonNewPostGuess;
         private System.Windows.Forms.Button buttonNewBirthdayGuess;
+        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.TextBox postMessageTextBox;
+        private System.Windows.Forms.BindingSource postBindingSource;
     }
 }

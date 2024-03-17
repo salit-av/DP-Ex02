@@ -159,8 +159,7 @@ namespace BasicFacebookFeatures
             m_PostToGuess = m_FeatureFacade.GetRandomPost();
             visibleObejctsOfGuessPostYear();
 
-            labelSelectedPost.Text = (m_PostToGuess == null) ? "No posts exists!" : m_PostToGuess.Message;
-            labelSelectedPost.ForeColor = Color.Black;
+            postMessageTextBox.Text = (m_PostToGuess == null) ? "No posts exists!" : m_PostToGuess.Message;
         }
 
         private void visibleObejctsOfGuessPostYear()
@@ -226,8 +225,7 @@ namespace BasicFacebookFeatures
                 Invoke(new Action(() =>
                 {
                     m_PostToGuess = postToGuess;
-                    labelSelectedPost.ForeColor = Color.Black;
-                    labelSelectedPost.Text = (m_PostToGuess == null) ? "No posts exists!" : m_PostToGuess.Message;
+                    postMessageTextBox.Text = (m_PostToGuess == null) ? "No posts exists!" : m_PostToGuess.Message;
                 }));
             }).Start();
         }
@@ -263,6 +261,11 @@ namespace BasicFacebookFeatures
                     labelFriendName.ForeColor = isCorrectGuess ? Color.PaleGreen : Color.Red;
                 }));
             }
+        }
+
+        private void postMessageTextBox_Leave(object sender, EventArgs e)
+        {
+            postBindingSource.DataSource = m_User.Posts;
         }
     }
 }
