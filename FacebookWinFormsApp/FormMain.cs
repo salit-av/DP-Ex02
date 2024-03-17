@@ -73,7 +73,6 @@ namespace BasicFacebookFeatures
             }).Start();
         }
 
-
         private void disableButtonsAfterLogout()
         {
             buttonLogin.Enabled = true;
@@ -107,7 +106,6 @@ namespace BasicFacebookFeatures
             }));
         }
 
-
         private void showGuessBirthdayMonth()
         {
             m_FriendToGuess = m_FeatureFacade.GetRandomFriend();
@@ -120,7 +118,6 @@ namespace BasicFacebookFeatures
             comboBoxGuessBirthdayMonth.Visible = true;
             buttonGuessBirthdayMonth.Visible = true;
             buttonNewBirthdayGuess.Visible = true;
-            labelInDevelopment.Visible = true;
             labelGuessFriendBirthday.Visible = true;
             labelFriendName.Visible = true;
         }
@@ -192,53 +189,79 @@ namespace BasicFacebookFeatures
 
         private void buttonGuessYear_Click(object sender, EventArgs e)
         {
-            if (m_PostToGuess != null)
+            new Thread(processPostGuessYear).Start();
+        }
+
+        private void processPostGuessYear()
+        {
+            string selectedYearOption = string.Empty;
+            bool hasPost = m_PostToGuess != null;
+
+            Invoke(new Action(() =>
             {
-                string selectedYearOption = comboBoxGuessPostYear.SelectedItem.ToString();
-                if (selectedYearOption == m_PostToGuess.CreatedTime.Value.Year.ToString())
+                if (hasPost)
                 {
-                    labelSelectedPost.Text = "YOUR GUESS IS CORRECT!!!";
-                    labelSelectedPost.ForeColor = Color.PaleGreen;
+                    selectedYearOption = comboBoxGuessPostYear.SelectedItem.ToString();
                 }
-                else
+            }));
+
+            if (hasPost)
+            {
+                bool isCorrect = selectedYearOption.Equals(m_PostToGuess.CreatedTime.Value.Year.ToString());
+
+                Invoke(new Action(() =>
                 {
-                    labelSelectedPost.Text = "your guess is wrong";
-                    labelSelectedPost.ForeColor = Color.Red;
-                }
+                    labelSelectedPost.Text = isCorrect ? "YOUR GUESS IS CORRECT!!!" : "your guess is wrong";
+                    labelSelectedPost.ForeColor = isCorrect ? Color.PaleGreen : Color.Red;
+                }));
             }
         }
 
         private void buttonNewPostGuess_Click(object sender, EventArgs e)
         {
-            m_PostToGuess = m_FeatureFacade.GetRandomPost();
-            labelSelectedPost.ForeColor = Color.Black;
-            labelSelectedPost.Text = (m_PostToGuess == null) ? "No posts exists!" : m_PostToGuess.Message;
+            new Thread(() =>
+            {
+                Post postToGuess = m_FeatureFacade.GetRandomPost();
+
+                Invoke(new Action(() =>
+                {
+                    m_PostToGuess = postToGuess;
+                    labelSelectedPost.ForeColor = Color.Black;
+                    labelSelectedPost.Text = (m_PostToGuess == null) ? "No posts exists!" : m_PostToGuess.Message;
+                }));
+            }).Start();
         }
 
         private void buttonNewBirthdayGuess_Click(object sender, EventArgs e)
         {
-            m_FriendToGuess = m_FeatureFacade.GetRandomFriend();
-            labelFriendName.ForeColor = Color.Black;
-            labelFriendName.Text = (m_FriendToGuess == null) ? "No friends exists!" : m_FriendToGuess.Name;
+            new Thread(() =>
+            {
+                User friendToGuess = m_FeatureFacade.GetRandomFriend();
+
+                Invoke(new Action(() =>
+                {
+                    m_FriendToGuess = friendToGuess;
+                    labelFriendName.ForeColor = Color.Black;
+                    labelFriendName.Text = (m_FriendToGuess == null) ? "No friends exists!" : m_FriendToGuess.Name;
+                }));
+            }).Start();
         }
+
 
         private void buttonGuessBirthdayMonth_Click(object sender, EventArgs e)
         {
+            int selectedMonthNumber = m_FeatureFacade.ConvertMonthStringToInt(comboBoxGuessBirthdayMonth.SelectedItem.ToString());
+
             if (m_FriendToGuess != null)
             {
-                int selectedMonthNumber = m_FeatureFacade.ConvertMonthStringToInt(comboBoxGuessBirthdayMonth.SelectedItem.ToString());
                 BirthdayFeature friendBirthday = FeatureFactory.CreateBirthdayFeature(m_FriendToGuess.Birthday);
-
-                if (selectedMonthNumber == friendBirthday.GetBirthdayMonth())
+                bool isCorrectGuess = selectedMonthNumber == friendBirthday.GetBirthdayMonth();
+                
+                Invoke(new Action(() =>
                 {
-                    labelFriendName.Text = "YOUR GUESS IS CORRECT!!!";
-                    labelFriendName.ForeColor = Color.PaleGreen;
-                }
-                else
-                {
-                    labelFriendName.Text = "your guess is wrong";
-                    labelFriendName.ForeColor = Color.Red;
-                }
+                    labelFriendName.Text = isCorrectGuess ? "YOUR GUESS IS CORRECT!!!" : "your guess is wrong";
+                    labelFriendName.ForeColor = isCorrectGuess ? Color.PaleGreen : Color.Red;
+                }));
             }
         }
     }
