@@ -2,6 +2,7 @@
 using System.Drawing;
 using System.Windows.Forms;
 using FacebookWrapper.ObjectModel;
+using System.Threading;
 
 namespace BasicFacebookFeatures
 {
@@ -22,19 +23,29 @@ namespace BasicFacebookFeatures
 
         private void buttonLogin_Click(object sender, EventArgs e)
         {
+            Thread loginThread = new Thread(loginProcess);
+            loginThread.Start();
+        }
+
+        private void loginProcess()
+        {
             if (FacebookAuthenticationManager.Instance.m_LoggedInUser == null)
             {
-                if (FacebookAuthenticationManager.Instance.Login("749307766594184", "email", "public_profile", "user_posts", "user_birthday", "user_friends"))
+                bool isLoggedIn = FacebookAuthenticationManager.Instance.Login("749307766594184", "email", "public_profile", "user_posts", "user_birthday", "user_friends");
+                if (isLoggedIn)
                 {
-                    m_User = FacebookAuthenticationManager.Instance.m_LoggedInUser;
-                    IBirthdayCountdownStrategy birthdayCountdownStrategy = new SimpleBirthdayCountdownStrategy();
-                    IPostAnalyzerStrategy postAnalyzerStrategy = new SimplePostAnalyzerStrategy();
+                    Invoke(new Action(() =>
+                    {
+                        m_User = FacebookAuthenticationManager.Instance.m_LoggedInUser;
+                        IBirthdayCountdownStrategy birthdayCountdownStrategy = new SimpleBirthdayCountdownStrategy();
+                        IPostAnalyzerStrategy postAnalyzerStrategy = new SimplePostAnalyzerStrategy();
 
-                    m_FeatureFacade = new FeatureFacade(m_User, birthdayCountdownStrategy, postAnalyzerStrategy);
+                        m_FeatureFacade = new FeatureFacade(m_User, birthdayCountdownStrategy, postAnalyzerStrategy);
 
-                    buttonLogin.Text = $"Logged in as {m_User.Name}";
-                    buttonLogin.BackColor = Color.LightGreen;
-                    enableButtonsAfterLogin();
+                        buttonLogin.Text = $"Logged in as {m_User.Name}";
+                        buttonLogin.BackColor = Color.LightGreen;
+                        enableButtonsAfterLogin();
+                    }));
                 }
             }
         }
@@ -49,11 +60,19 @@ namespace BasicFacebookFeatures
 
         private void buttonLogout_Click(object sender, EventArgs e)
         {
-            FacebookAuthenticationManager.Instance.Logout();
-            buttonLogin.Text = "Login";
-            buttonLogin.BackColor = buttonLogout.BackColor;
-            disableButtonsAfterLogout();
+            new Thread(() =>
+            {
+                FacebookAuthenticationManager.Instance.Logout();
+
+                Invoke(new Action(() =>
+                {
+                    buttonLogin.Text = "Login";
+                    buttonLogin.BackColor = buttonLogout.BackColor;
+                    disableButtonsAfterLogout();
+                }));
+            }).Start();
         }
+
 
         private void disableButtonsAfterLogout()
         {
@@ -66,17 +85,28 @@ namespace BasicFacebookFeatures
 
         private void buttonBirthdayCounter_Click(object sender, EventArgs e)
         {
-            TimeSpan timeSpan = m_FeatureFacade.GetTimeUntilNextBirthday();
-
-            labelBirthdayCountdown.Visible = true;
-            labelBirthdayCountdown.Text = $"Time until next birthday: {timeSpan.Days} days, {timeSpan.Hours} hours, {timeSpan.Minutes} minutes.";
-
-            if (!m_IsUserGuessedFriendBirthday)
+            new Thread(() =>
             {
-                showGuessBirthdayMonth();
-                m_IsUserGuessedFriendBirthday = true;
-            }
+                TimeSpan timeSpan = m_FeatureFacade.GetTimeUntilNextBirthday();
+                UpdateUIAfterBirthdayCalculation(timeSpan);
+            }).Start();
         }
+
+        private void UpdateUIAfterBirthdayCalculation(TimeSpan timeSpan)
+        {
+            Invoke(new Action(() =>
+            {
+                labelBirthdayCountdown.Visible = true;
+                labelBirthdayCountdown.Text = $"Time until next birthday: {timeSpan.Days} days, {timeSpan.Hours} hours, {timeSpan.Minutes} minutes.";
+
+                if (!m_IsUserGuessedFriendBirthday)
+                {
+                    showGuessBirthdayMonth();
+                    m_IsUserGuessedFriendBirthday = true;
+                }
+            }));
+        }
+
 
         private void showGuessBirthdayMonth()
         {
@@ -94,24 +124,37 @@ namespace BasicFacebookFeatures
             labelGuessFriendBirthday.Visible = true;
             labelFriendName.Visible = true;
         }
-
         private void buttonNumberOfPostInPeriodOfTime_Click(object sender, EventArgs e)
         {
             string selectedPeriodOption = comboBoxNumberOfPostPeriodsOfTime.SelectedItem.ToString();
-
             labelPleaseWait.Visible = true;
             labelPleaseWait.Text = "Please wait...";
+            CountPostsInBackground(selectedPeriodOption);
+        }
 
-            labelNumberOfPostsInPeriodOfTime.Visible = true;
-            labelNumberOfPostsInPeriodOfTime.Text = $"{m_FeatureFacade.CountPostsInPeriod(selectedPeriodOption)} posts found";
-
-            labelPleaseWait.Visible = false;
-
-            if (!m_IsUserGuessedPostYear)
+        private void CountPostsInBackground(string selectedPeriodOption)
+        {
+            new Thread(() =>
             {
-                showGuessPostYear();
-                m_IsUserGuessedPostYear = true;
-            }
+                int postCount = m_FeatureFacade.CountPostsInPeriod(selectedPeriodOption);
+                UpdateUIAfterCountingPosts(postCount);
+            }).Start();
+        }
+
+        private void UpdateUIAfterCountingPosts(int postCount)
+        {
+            Invoke(new Action(() =>
+            {
+                labelNumberOfPostsInPeriodOfTime.Visible = true;
+                labelNumberOfPostsInPeriodOfTime.Text = $"{postCount} posts found";
+                labelPleaseWait.Visible = false;
+
+                if (!m_IsUserGuessedPostYear)
+                {
+                    showGuessPostYear();
+                    m_IsUserGuessedPostYear = true;
+                }
+            }));
         }
 
         private void showGuessPostYear()
