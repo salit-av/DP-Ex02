@@ -34,7 +34,6 @@
             this.buttonLogin = new System.Windows.Forms.Button();
             this.panelBirthday = new System.Windows.Forms.Panel();
             this.buttonNewBirthdayGuess = new System.Windows.Forms.Button();
-            this.labelInDevelopment = new System.Windows.Forms.Label();
             this.labelFriendName = new System.Windows.Forms.Label();
             this.buttonGuessBirthdayMonth = new System.Windows.Forms.Button();
             this.comboBoxGuessBirthdayMonth = new System.Windows.Forms.ComboBox();
@@ -116,7 +115,6 @@
             // 
             this.panelBirthday.BackColor = System.Drawing.Color.RoyalBlue;
             this.panelBirthday.Controls.Add(this.buttonNewBirthdayGuess);
-            this.panelBirthday.Controls.Add(this.labelInDevelopment);
             this.panelBirthday.Controls.Add(this.labelFriendName);
             this.panelBirthday.Controls.Add(this.buttonGuessBirthdayMonth);
             this.panelBirthday.Controls.Add(this.comboBoxGuessBirthdayMonth);
@@ -142,23 +140,10 @@
             this.buttonNewBirthdayGuess.Visible = false;
             this.buttonNewBirthdayGuess.Click += new System.EventHandler(this.buttonNewBirthdayGuess_Click);
             // 
-            // labelInDevelopment
-            // 
-            this.labelInDevelopment.BackColor = System.Drawing.Color.Transparent;
-            this.labelInDevelopment.Font = new System.Drawing.Font("Microsoft Sans Serif", 27.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelInDevelopment.ForeColor = System.Drawing.Color.Maroon;
-            this.labelInDevelopment.Location = new System.Drawing.Point(153, 252);
-            this.labelInDevelopment.Name = "labelInDevelopment";
-            this.labelInDevelopment.Size = new System.Drawing.Size(292, 42);
-            this.labelInDevelopment.TabIndex = 70;
-            this.labelInDevelopment.Text = "In Development";
-            this.labelInDevelopment.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.labelInDevelopment.Visible = false;
-            // 
             // labelFriendName
             // 
-            this.labelFriendName.ForeColor = System.Drawing.Color.LightGray;
-            this.labelFriendName.Location = new System.Drawing.Point(138, 383);
+            this.labelFriendName.ForeColor = System.Drawing.Color.Black;
+            this.labelFriendName.Location = new System.Drawing.Point(135, 356);
             this.labelFriendName.Name = "labelFriendName";
             this.labelFriendName.Size = new System.Drawing.Size(324, 60);
             this.labelFriendName.TabIndex = 69;
@@ -208,8 +193,8 @@
             // 
             this.labelGuessFriendBirthday.AutoSize = true;
             this.labelGuessFriendBirthday.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelGuessFriendBirthday.ForeColor = System.Drawing.Color.LightGray;
-            this.labelGuessFriendBirthday.Location = new System.Drawing.Point(111, 326);
+            this.labelGuessFriendBirthday.ForeColor = System.Drawing.Color.Black;
+            this.labelGuessFriendBirthday.Location = new System.Drawing.Point(112, 309);
             this.labelGuessFriendBirthday.Name = "labelGuessFriendBirthday";
             this.labelGuessFriendBirthday.Size = new System.Drawing.Size(386, 18);
             this.labelGuessFriendBirthday.TabIndex = 69;
@@ -470,7 +455,6 @@
         private System.Windows.Forms.Panel panelBirthday;
         private System.Windows.Forms.Label labelBirthdayExplain;
         private System.Windows.Forms.Label labelNumberOfPostExplain;
-        private System.Windows.Forms.Label labelInDevelopment;
         private System.Windows.Forms.Label labelFriendName;
         private System.Windows.Forms.Button buttonGuessBirthdayMonth;
         private System.Windows.Forms.ComboBox comboBoxGuessBirthdayMonth;
