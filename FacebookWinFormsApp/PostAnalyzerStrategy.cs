@@ -3,17 +3,16 @@ using FacebookWrapper.ObjectModel;
 
 namespace BasicFacebookFeatures
 {
-    public interface IPostAnalyzerStrategy
+    internal interface IPostAnalyzerStrategy
     {
         int CountPostsInPeriod(string i_Period);
     }
 
-    public class SimplePostAnalyzerStrategy : IPostAnalyzerStrategy
+    internal class SimplePostAnalyzerStrategy : IPostAnalyzerStrategy
     {
         public int CountPostsInPeriod(string i_periodOfTime)
         {
             DateTime now = DateTime.Now;
-
             int counter = 0;
 
             foreach (Post post in FacebookAuthenticationManager.Instance.m_LoggedInUser.Posts)

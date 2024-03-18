@@ -5,21 +5,22 @@ namespace BasicFacebookFeatures
 {
     internal class FacebookAuthenticationManager
     {
-        private static FacebookAuthenticationManager instance;
+        private static FacebookAuthenticationManager s_Instance;
         private LoginResult m_LoginResult;
         internal User m_LoggedInUser { get; private set; }
 
         private FacebookAuthenticationManager() { }
 
-        public static FacebookAuthenticationManager Instance
+        internal static FacebookAuthenticationManager Instance
         {
             get
             {
-                if (instance == null)
+                if (s_Instance == null)
                 {
-                    instance = new FacebookAuthenticationManager();
+                    s_Instance = new FacebookAuthenticationManager();
                 }
-                return instance;
+
+                return s_Instance;
             }
         }
 

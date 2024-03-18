@@ -2,12 +2,12 @@
 
 namespace BasicFacebookFeatures
 {
-    public interface IBirthdayCountdownStrategy
+    internal interface IBirthdayCountdownStrategy
     {
         TimeSpan GetTimeUntilNextBirthday(string i_Birthday);
     }
 
-    public class SimpleBirthdayCountdownStrategy : IBirthdayCountdownStrategy
+    internal class SimpleBirthdayCountdownStrategy : IBirthdayCountdownStrategy
     {
         public TimeSpan GetTimeUntilNextBirthday(string i_Birthday)
         {
