@@ -36,8 +36,7 @@
             this.labelBirthdayCountdown = new System.Windows.Forms.Label();
             this.labelBirthdayExplain = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.labelSelectedPost = new System.Windows.Forms.Label();
-            this.checkBoxPostFromList = new System.Windows.Forms.CheckBox();
+            this.labelIsPostGuessCorrect = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.buttonShowPostsList = new System.Windows.Forms.Button();
             this.labelGuessPost = new System.Windows.Forms.Label();
@@ -152,8 +151,7 @@
             // panel2
             // 
             this.panel2.BackColor = System.Drawing.Color.RoyalBlue;
-            this.panel2.Controls.Add(this.labelSelectedPost);
-            this.panel2.Controls.Add(this.checkBoxPostFromList);
+            this.panel2.Controls.Add(this.labelIsPostGuessCorrect);
             this.panel2.Controls.Add(this.label2);
             this.panel2.Controls.Add(this.buttonShowPostsList);
             this.panel2.Controls.Add(this.labelGuessPost);
@@ -167,27 +165,14 @@
             this.panel2.Size = new System.Drawing.Size(642, 558);
             this.panel2.TabIndex = 66;
             // 
-            // labelSelectedPost
+            // labelIsPostGuessCorrect
             // 
-            this.labelSelectedPost.ForeColor = System.Drawing.Color.Black;
-            this.labelSelectedPost.Location = new System.Drawing.Point(212, 512);
-            this.labelSelectedPost.Name = "labelSelectedPost";
-            this.labelSelectedPost.Size = new System.Drawing.Size(273, 39);
-            this.labelSelectedPost.TabIndex = 68;
-            this.labelSelectedPost.TextAlign = System.Drawing.ContentAlignment.TopCenter;
-            // 
-            // checkBoxPostFromList
-            // 
-            this.checkBoxPostFromList.AutoSize = true;
-            this.checkBoxPostFromList.Checked = true;
-            this.checkBoxPostFromList.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkBoxPostFromList.Enabled = false;
-            this.checkBoxPostFromList.Location = new System.Drawing.Point(293, 474);
-            this.checkBoxPostFromList.Name = "checkBoxPostFromList";
-            this.checkBoxPostFromList.Size = new System.Drawing.Size(113, 22);
-            this.checkBoxPostFromList.TabIndex = 71;
-            this.checkBoxPostFromList.Text = "post from list";
-            this.checkBoxPostFromList.UseVisualStyleBackColor = true;
+            this.labelIsPostGuessCorrect.ForeColor = System.Drawing.Color.Black;
+            this.labelIsPostGuessCorrect.Location = new System.Drawing.Point(212, 512);
+            this.labelIsPostGuessCorrect.Name = "labelIsPostGuessCorrect";
+            this.labelIsPostGuessCorrect.Size = new System.Drawing.Size(273, 39);
+            this.labelIsPostGuessCorrect.TabIndex = 68;
+            this.labelIsPostGuessCorrect.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
             // label2
             // 
@@ -260,7 +245,7 @@
             "2016",
             "2015",
             "2014"});
-            this.comboBoxGuessPostYear.Location = new System.Drawing.Point(85, 472);
+            this.comboBoxGuessPostYear.Location = new System.Drawing.Point(157, 466);
             this.comboBoxGuessPostYear.Name = "comboBoxGuessPostYear";
             this.comboBoxGuessPostYear.Size = new System.Drawing.Size(112, 26);
             this.comboBoxGuessPostYear.TabIndex = 66;
@@ -277,6 +262,7 @@
             this.listBoxPhotos.Name = "listBoxPhotos";
             this.listBoxPhotos.Size = new System.Drawing.Size(294, 256);
             this.listBoxPhotos.TabIndex = 66;
+            this.listBoxPhotos.SelectedIndexChanged += new System.EventHandler(this.listBoxPhotos_SelectedIndexChanged);
             // 
             // buttonNewPostGuess
             // 
@@ -294,7 +280,7 @@
             // 
             this.buttonGuessYear.Enabled = false;
             this.buttonGuessYear.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonGuessYear.Location = new System.Drawing.Point(489, 466);
+            this.buttonGuessYear.Location = new System.Drawing.Point(396, 460);
             this.buttonGuessYear.Name = "buttonGuessYear";
             this.buttonGuessYear.Size = new System.Drawing.Size(138, 37);
             this.buttonGuessYear.TabIndex = 67;
@@ -578,7 +564,7 @@
         private System.Windows.Forms.Button buttonGuessBirthdayMonth;
         private System.Windows.Forms.ComboBox comboBoxGuessBirthdayMonth;
         private System.Windows.Forms.Label labelGuessFriendBirthday;
-        private System.Windows.Forms.Label labelSelectedPost;
+        private System.Windows.Forms.Label labelIsPostGuessCorrect;
         private System.Windows.Forms.Button buttonGuessYear;
         private System.Windows.Forms.ComboBox comboBoxGuessPostYear;
         private System.Windows.Forms.Label labelGuessPost;
@@ -592,7 +578,6 @@
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.CheckBox checkBoxPostFromList;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox messageTextBox;
     }

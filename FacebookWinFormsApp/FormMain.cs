@@ -11,6 +11,7 @@ namespace BasicFacebookFeatures
         private User m_User;
         private User m_FriendToGuess;
         private Post m_PostToGuess;
+        private bool m_IsPostToGuessFromList;
         private FeatureFacade m_FeatureFacade;
 
         internal FormMain()
@@ -65,7 +66,6 @@ namespace BasicFacebookFeatures
             comboBoxNumberOfPostPeriodsOfTime.Enabled = true;
             comboBoxGuessBirthdayMonth.Enabled = true;
             comboBoxGuessPostYear.Enabled = true;
-            checkBoxPostFromList.Enabled = true;
         }
 
         private void buttonLogout_Click(object sender, EventArgs e)
@@ -94,7 +94,6 @@ namespace BasicFacebookFeatures
             comboBoxNumberOfPostPeriodsOfTime.Enabled = false;
             comboBoxGuessBirthdayMonth.Enabled = false;
             comboBoxGuessPostYear.Enabled = false;
-            checkBoxPostFromList.Enabled = false;
         }
 
         private void buttonBirthdayCounter_Click(object sender, EventArgs e)
@@ -151,8 +150,8 @@ namespace BasicFacebookFeatures
         private void showGuessPostYear()
         {
             m_PostToGuess = m_FeatureFacade.GetRandomPost();
-            labelSelectedPost.Text = (m_PostToGuess == null) ? "No posts exists!" : m_PostToGuess.Message;
-            labelSelectedPost.ForeColor = Color.Black;
+            messageTextBox.Text = (m_PostToGuess == null) ? "No posts exists!" : m_PostToGuess.Message;
+            m_IsPostToGuessFromList = false;
         }
 
         private void comboBoxStatistical_SelectedIndexChanged(object sender, EventArgs e)
@@ -177,29 +176,43 @@ namespace BasicFacebookFeatures
 
         private void processPostGuessYear()
         {
-            string selectedYearOption = string.Empty;
-            if (checkBoxPostFromList.Checked)
+            checkIsPostToGuessFromList();
+            checkYearGuess(getSelectedYearOption());
+        }
+
+        private void checkIsPostToGuessFromList()
+        {
+            if (m_IsPostToGuessFromList)
             {
                 m_PostToGuess = postBindingSource.Current as Post;
             }
-            bool hasPost = m_PostToGuess != null;
-
+        }
+        
+        private string getSelectedYearOption()
+        { 
+            string selectedYearOption = string.Empty;
+        
             Invoke(new Action(() =>
             {
-                if (hasPost)
+                if (m_PostToGuess != null)
                 {
                     selectedYearOption = comboBoxGuessPostYear.SelectedItem.ToString();
                 }
             }));
 
-            if (hasPost)
+            return selectedYearOption;
+        }
+
+        private void checkYearGuess(string i_SelectedYearOption)
+        {
+            if (m_PostToGuess != null)
             {
-                bool isCorrect = selectedYearOption.Equals(m_PostToGuess.CreatedTime.Value.Year.ToString());
+                bool isCorrect = i_SelectedYearOption.Equals(m_PostToGuess.CreatedTime.Value.Year.ToString());
 
                 Invoke(new Action(() =>
                 {
-                    labelSelectedPost.Text = isCorrect ? "YOUR GUESS IS CORRECT!!!" : "your guess is wrong";
-                    labelSelectedPost.ForeColor = isCorrect ? Color.PaleGreen : Color.Red;
+                    labelIsPostGuessCorrect.Text = isCorrect ? "YOUR GUESS IS CORRECT!!!" : "your guess is wrong";
+                    labelIsPostGuessCorrect.ForeColor = isCorrect ? Color.PaleGreen : Color.Red;
                 }));
             }
         }
@@ -209,11 +222,11 @@ namespace BasicFacebookFeatures
             new Thread(() =>
             {
                 Post postToGuess = m_FeatureFacade.GetRandomPost();
+                m_IsPostToGuessFromList = false;
 
                 Invoke(new Action(() =>
                 {
                     m_PostToGuess = postToGuess;
-                    labelSelectedPost.ForeColor = Color.Black;
                     messageTextBox.Text = (m_PostToGuess == null) ? "No posts exists!" : m_PostToGuess.Message;
                 }));
             }).Start();
@@ -254,6 +267,11 @@ namespace BasicFacebookFeatures
         private void buttonShowPostsList_Click(object sender, EventArgs e)
         {
             postBindingSource.DataSource = m_User.Posts;
+        }
+
+        private void listBoxPhotos_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            m_IsPostToGuessFromList = true;
         }
     }
 }
