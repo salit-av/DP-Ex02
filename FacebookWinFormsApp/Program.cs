@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Windows.Forms;
+using CefSharp;
+using CefSharp.WinForms;
 using FacebookWrapper;
 
 namespace BasicFacebookFeatures
@@ -14,9 +16,14 @@ namespace BasicFacebookFeatures
         {
             Clipboard.SetText("design.patterns20cc");
             FacebookService.s_UseForamttedToStrings = true;
+
+            Cef.Initialize(new CefSettings());
+
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new FormMain());
+
+            Cef.Shutdown();
         }
     }
 }
