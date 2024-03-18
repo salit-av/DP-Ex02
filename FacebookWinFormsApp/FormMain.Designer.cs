@@ -30,17 +30,17 @@
         {
             this.components = new System.ComponentModel.Container();
             this.tabPage = new System.Windows.Forms.TabPage();
-            this.panel3 = new System.Windows.Forms.Panel();
+            this.panelBirthdayCounter = new System.Windows.Forms.Panel();
             this.labelBirthdayTitle = new System.Windows.Forms.Label();
             this.buttonBirthdayCountdown = new System.Windows.Forms.Button();
             this.labelBirthdayCountdown = new System.Windows.Forms.Label();
             this.labelBirthdayExplain = new System.Windows.Forms.Label();
-            this.panel2 = new System.Windows.Forms.Panel();
+            this.panelPostsGuesses = new System.Windows.Forms.Panel();
             this.labelIsPostGuessCorrect = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
+            this.labelPostGuesses = new System.Windows.Forms.Label();
             this.buttonShowPostsList = new System.Windows.Forms.Button();
             this.labelGuessPost = new System.Windows.Forms.Label();
-            this.panel1 = new System.Windows.Forms.Panel();
+            this.panelMessageTextBox = new System.Windows.Forms.Panel();
             this.messageTextBox = new System.Windows.Forms.TextBox();
             this.postBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.comboBoxGuessPostYear = new System.Windows.Forms.ComboBox();
@@ -50,8 +50,8 @@
             this.labelWinFormTitle = new System.Windows.Forms.Label();
             this.buttonLogout = new System.Windows.Forms.Button();
             this.buttonLogin = new System.Windows.Forms.Button();
-            this.panelBirthday = new System.Windows.Forms.Panel();
-            this.label1 = new System.Windows.Forms.Label();
+            this.panelBirthdayGuesses = new System.Windows.Forms.Panel();
+            this.labelBirthdayGuesses = new System.Windows.Forms.Label();
             this.buttonNewBirthdayGuess = new System.Windows.Forms.Button();
             this.labelFriendName = new System.Windows.Forms.Label();
             this.buttonGuessBirthdayMonth = new System.Windows.Forms.Button();
@@ -66,11 +66,11 @@
             this.comboBoxNumberOfPostPeriodsOfTime = new System.Windows.Forms.ComboBox();
             this.tabControl = new System.Windows.Forms.TabControl();
             this.tabPage.SuspendLayout();
-            this.panel3.SuspendLayout();
-            this.panel2.SuspendLayout();
-            this.panel1.SuspendLayout();
+            this.panelBirthdayCounter.SuspendLayout();
+            this.panelPostsGuesses.SuspendLayout();
+            this.panelMessageTextBox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.postBindingSource)).BeginInit();
-            this.panelBirthday.SuspendLayout();
+            this.panelBirthdayGuesses.SuspendLayout();
             this.panelPostsData.SuspendLayout();
             this.tabControl.SuspendLayout();
             this.SuspendLayout();
@@ -79,12 +79,12 @@
             // 
             this.tabPage.AutoScroll = true;
             this.tabPage.BackColor = System.Drawing.Color.LightCyan;
-            this.tabPage.Controls.Add(this.panel3);
-            this.tabPage.Controls.Add(this.panel2);
+            this.tabPage.Controls.Add(this.panelBirthdayCounter);
+            this.tabPage.Controls.Add(this.panelPostsGuesses);
             this.tabPage.Controls.Add(this.labelWinFormTitle);
             this.tabPage.Controls.Add(this.buttonLogout);
             this.tabPage.Controls.Add(this.buttonLogin);
-            this.tabPage.Controls.Add(this.panelBirthday);
+            this.tabPage.Controls.Add(this.panelBirthdayGuesses);
             this.tabPage.Controls.Add(this.panelPostsData);
             this.tabPage.Location = new System.Drawing.Point(4, 27);
             this.tabPage.Name = "tabPage";
@@ -93,17 +93,17 @@
             this.tabPage.TabIndex = 0;
             this.tabPage.Text = "FacebookWinFormsApp";
             // 
-            // panel3
+            // panelBirthdayCounter
             // 
-            this.panel3.BackColor = System.Drawing.Color.RoyalBlue;
-            this.panel3.Controls.Add(this.labelBirthdayTitle);
-            this.panel3.Controls.Add(this.buttonBirthdayCountdown);
-            this.panel3.Controls.Add(this.labelBirthdayCountdown);
-            this.panel3.Controls.Add(this.labelBirthdayExplain);
-            this.panel3.Location = new System.Drawing.Point(18, 294);
-            this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(484, 168);
-            this.panel3.TabIndex = 67;
+            this.panelBirthdayCounter.BackColor = System.Drawing.Color.RoyalBlue;
+            this.panelBirthdayCounter.Controls.Add(this.labelBirthdayTitle);
+            this.panelBirthdayCounter.Controls.Add(this.buttonBirthdayCountdown);
+            this.panelBirthdayCounter.Controls.Add(this.labelBirthdayCountdown);
+            this.panelBirthdayCounter.Controls.Add(this.labelBirthdayExplain);
+            this.panelBirthdayCounter.Location = new System.Drawing.Point(18, 293);
+            this.panelBirthdayCounter.Name = "panelBirthdayCounter";
+            this.panelBirthdayCounter.Size = new System.Drawing.Size(484, 168);
+            this.panelBirthdayCounter.TabIndex = 67;
             // 
             // labelBirthdayTitle
             // 
@@ -119,7 +119,7 @@
             // 
             this.buttonBirthdayCountdown.Enabled = false;
             this.buttonBirthdayCountdown.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonBirthdayCountdown.Location = new System.Drawing.Point(180, 82);
+            this.buttonBirthdayCountdown.Location = new System.Drawing.Point(183, 82);
             this.buttonBirthdayCountdown.Name = "buttonBirthdayCountdown";
             this.buttonBirthdayCountdown.Size = new System.Drawing.Size(101, 37);
             this.buttonBirthdayCountdown.TabIndex = 60;
@@ -131,7 +131,7 @@
             // 
             this.labelBirthdayCountdown.AutoSize = true;
             this.labelBirthdayCountdown.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelBirthdayCountdown.Location = new System.Drawing.Point(27, 133);
+            this.labelBirthdayCountdown.Location = new System.Drawing.Point(29, 133);
             this.labelBirthdayCountdown.Name = "labelBirthdayCountdown";
             this.labelBirthdayCountdown.Size = new System.Drawing.Size(422, 17);
             this.labelBirthdayCountdown.TabIndex = 59;
@@ -148,22 +148,22 @@
             this.labelBirthdayExplain.TabIndex = 60;
             this.labelBirthdayExplain.Text = " Find out your birthday countdown!";
             // 
-            // panel2
+            // panelPostsGuesses
             // 
-            this.panel2.BackColor = System.Drawing.Color.RoyalBlue;
-            this.panel2.Controls.Add(this.labelIsPostGuessCorrect);
-            this.panel2.Controls.Add(this.label2);
-            this.panel2.Controls.Add(this.buttonShowPostsList);
-            this.panel2.Controls.Add(this.labelGuessPost);
-            this.panel2.Controls.Add(this.panel1);
-            this.panel2.Controls.Add(this.comboBoxGuessPostYear);
-            this.panel2.Controls.Add(this.listBoxPhotos);
-            this.panel2.Controls.Add(this.buttonNewPostGuess);
-            this.panel2.Controls.Add(this.buttonGuessYear);
-            this.panel2.Location = new System.Drawing.Point(525, 111);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(642, 558);
-            this.panel2.TabIndex = 66;
+            this.panelPostsGuesses.BackColor = System.Drawing.Color.RoyalBlue;
+            this.panelPostsGuesses.Controls.Add(this.labelIsPostGuessCorrect);
+            this.panelPostsGuesses.Controls.Add(this.labelPostGuesses);
+            this.panelPostsGuesses.Controls.Add(this.buttonShowPostsList);
+            this.panelPostsGuesses.Controls.Add(this.labelGuessPost);
+            this.panelPostsGuesses.Controls.Add(this.panelMessageTextBox);
+            this.panelPostsGuesses.Controls.Add(this.comboBoxGuessPostYear);
+            this.panelPostsGuesses.Controls.Add(this.listBoxPhotos);
+            this.panelPostsGuesses.Controls.Add(this.buttonNewPostGuess);
+            this.panelPostsGuesses.Controls.Add(this.buttonGuessYear);
+            this.panelPostsGuesses.Location = new System.Drawing.Point(526, 111);
+            this.panelPostsGuesses.Name = "panelPostsGuesses";
+            this.panelPostsGuesses.Size = new System.Drawing.Size(642, 558);
+            this.panelPostsGuesses.TabIndex = 66;
             // 
             // labelIsPostGuessCorrect
             // 
@@ -174,21 +174,21 @@
             this.labelIsPostGuessCorrect.TabIndex = 68;
             this.labelIsPostGuessCorrect.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
-            // label2
+            // labelPostGuesses
             // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(225, 23);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(211, 31);
-            this.label2.TabIndex = 70;
-            this.label2.Text = "Posts Guesses";
+            this.labelPostGuesses.AutoSize = true;
+            this.labelPostGuesses.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelPostGuesses.Location = new System.Drawing.Point(224, 23);
+            this.labelPostGuesses.Name = "labelPostGuesses";
+            this.labelPostGuesses.Size = new System.Drawing.Size(211, 31);
+            this.labelPostGuesses.TabIndex = 70;
+            this.labelPostGuesses.Text = "Posts Guesses";
             // 
             // buttonShowPostsList
             // 
             this.buttonShowPostsList.Enabled = false;
             this.buttonShowPostsList.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonShowPostsList.Location = new System.Drawing.Point(380, 117);
+            this.buttonShowPostsList.Location = new System.Drawing.Point(376, 117);
             this.buttonShowPostsList.Name = "buttonShowPostsList";
             this.buttonShowPostsList.Size = new System.Drawing.Size(204, 37);
             this.buttonShowPostsList.TabIndex = 67;
@@ -200,20 +200,20 @@
             // 
             this.labelGuessPost.AutoSize = true;
             this.labelGuessPost.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelGuessPost.Location = new System.Drawing.Point(135, 70);
+            this.labelGuessPost.Location = new System.Drawing.Point(133, 70);
             this.labelGuessPost.Name = "labelGuessPost";
             this.labelGuessPost.Size = new System.Drawing.Size(399, 18);
             this.labelGuessPost.TabIndex = 65;
             this.labelGuessPost.Text = "Will you dare to guess when you published a post?  ";
             this.labelGuessPost.Visible = false;
             // 
-            // panel1
+            // panelMessageTextBox
             // 
-            this.panel1.Controls.Add(this.messageTextBox);
-            this.panel1.Location = new System.Drawing.Point(19, 173);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(294, 256);
-            this.panel1.TabIndex = 68;
+            this.panelMessageTextBox.Controls.Add(this.messageTextBox);
+            this.panelMessageTextBox.Location = new System.Drawing.Point(19, 173);
+            this.panelMessageTextBox.Name = "panelMessageTextBox";
+            this.panelMessageTextBox.Size = new System.Drawing.Size(294, 256);
+            this.panelMessageTextBox.TabIndex = 68;
             // 
             // messageTextBox
             // 
@@ -248,7 +248,7 @@
             "2016",
             "2015",
             "2014"});
-            this.comboBoxGuessPostYear.Location = new System.Drawing.Point(157, 466);
+            this.comboBoxGuessPostYear.Location = new System.Drawing.Point(106, 466);
             this.comboBoxGuessPostYear.Name = "comboBoxGuessPostYear";
             this.comboBoxGuessPostYear.Size = new System.Drawing.Size(112, 26);
             this.comboBoxGuessPostYear.TabIndex = 66;
@@ -261,7 +261,7 @@
             this.listBoxPhotos.DisplayMember = "Message";
             this.listBoxPhotos.FormattingEnabled = true;
             this.listBoxPhotos.ItemHeight = 18;
-            this.listBoxPhotos.Location = new System.Drawing.Point(333, 173);
+            this.listBoxPhotos.Location = new System.Drawing.Point(329, 173);
             this.listBoxPhotos.Name = "listBoxPhotos";
             this.listBoxPhotos.Size = new System.Drawing.Size(294, 256);
             this.listBoxPhotos.TabIndex = 66;
@@ -271,7 +271,7 @@
             // 
             this.buttonNewPostGuess.Enabled = false;
             this.buttonNewPostGuess.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonNewPostGuess.Location = new System.Drawing.Point(65, 117);
+            this.buttonNewPostGuess.Location = new System.Drawing.Point(66, 117);
             this.buttonNewPostGuess.Name = "buttonNewPostGuess";
             this.buttonNewPostGuess.Size = new System.Drawing.Size(204, 37);
             this.buttonNewPostGuess.TabIndex = 70;
@@ -283,7 +283,7 @@
             // 
             this.buttonGuessYear.Enabled = false;
             this.buttonGuessYear.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonGuessYear.Location = new System.Drawing.Point(396, 460);
+            this.buttonGuessYear.Location = new System.Drawing.Point(410, 460);
             this.buttonGuessYear.Name = "buttonGuessYear";
             this.buttonGuessYear.Size = new System.Drawing.Size(138, 37);
             this.buttonGuessYear.TabIndex = 67;
@@ -326,35 +326,35 @@
             this.buttonLogin.UseVisualStyleBackColor = false;
             this.buttonLogin.Click += new System.EventHandler(this.buttonLogin_Click);
             // 
-            // panelBirthday
+            // panelBirthdayGuesses
             // 
-            this.panelBirthday.BackColor = System.Drawing.Color.RoyalBlue;
-            this.panelBirthday.Controls.Add(this.label1);
-            this.panelBirthday.Controls.Add(this.buttonNewBirthdayGuess);
-            this.panelBirthday.Controls.Add(this.labelFriendName);
-            this.panelBirthday.Controls.Add(this.buttonGuessBirthdayMonth);
-            this.panelBirthday.Controls.Add(this.comboBoxGuessBirthdayMonth);
-            this.panelBirthday.Controls.Add(this.labelGuessFriendBirthday);
-            this.panelBirthday.Location = new System.Drawing.Point(18, 476);
-            this.panelBirthday.Name = "panelBirthday";
-            this.panelBirthday.Size = new System.Drawing.Size(484, 193);
-            this.panelBirthday.TabIndex = 64;
+            this.panelBirthdayGuesses.BackColor = System.Drawing.Color.RoyalBlue;
+            this.panelBirthdayGuesses.Controls.Add(this.labelBirthdayGuesses);
+            this.panelBirthdayGuesses.Controls.Add(this.buttonNewBirthdayGuess);
+            this.panelBirthdayGuesses.Controls.Add(this.labelFriendName);
+            this.panelBirthdayGuesses.Controls.Add(this.buttonGuessBirthdayMonth);
+            this.panelBirthdayGuesses.Controls.Add(this.comboBoxGuessBirthdayMonth);
+            this.panelBirthdayGuesses.Controls.Add(this.labelGuessFriendBirthday);
+            this.panelBirthdayGuesses.Location = new System.Drawing.Point(18, 476);
+            this.panelBirthdayGuesses.Name = "panelBirthdayGuesses";
+            this.panelBirthdayGuesses.Size = new System.Drawing.Size(484, 193);
+            this.panelBirthdayGuesses.TabIndex = 64;
             // 
-            // label1
+            // labelBirthdayGuesses
             // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(105, 15);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(245, 31);
-            this.label1.TabIndex = 61;
-            this.label1.Text = "Birthday Guesses";
+            this.labelBirthdayGuesses.AutoSize = true;
+            this.labelBirthdayGuesses.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelBirthdayGuesses.Location = new System.Drawing.Point(105, 15);
+            this.labelBirthdayGuesses.Name = "labelBirthdayGuesses";
+            this.labelBirthdayGuesses.Size = new System.Drawing.Size(245, 31);
+            this.labelBirthdayGuesses.TabIndex = 61;
+            this.labelBirthdayGuesses.Text = "Birthday Guesses";
             // 
             // buttonNewBirthdayGuess
             // 
             this.buttonNewBirthdayGuess.Enabled = false;
             this.buttonNewBirthdayGuess.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonNewBirthdayGuess.Location = new System.Drawing.Point(331, 138);
+            this.buttonNewBirthdayGuess.Location = new System.Drawing.Point(340, 138);
             this.buttonNewBirthdayGuess.Name = "buttonNewBirthdayGuess";
             this.buttonNewBirthdayGuess.Size = new System.Drawing.Size(118, 37);
             this.buttonNewBirthdayGuess.TabIndex = 71;
@@ -376,7 +376,7 @@
             // 
             this.buttonGuessBirthdayMonth.Enabled = false;
             this.buttonGuessBirthdayMonth.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonGuessBirthdayMonth.Location = new System.Drawing.Point(163, 138);
+            this.buttonGuessBirthdayMonth.Location = new System.Drawing.Point(175, 138);
             this.buttonGuessBirthdayMonth.Name = "buttonGuessBirthdayMonth";
             this.buttonGuessBirthdayMonth.Size = new System.Drawing.Size(139, 37);
             this.buttonGuessBirthdayMonth.TabIndex = 69;
@@ -402,9 +402,9 @@
             "October",
             "November",
             "December"});
-            this.comboBoxGuessBirthdayMonth.Location = new System.Drawing.Point(13, 144);
+            this.comboBoxGuessBirthdayMonth.Location = new System.Drawing.Point(26, 144);
             this.comboBoxGuessBirthdayMonth.Name = "comboBoxGuessBirthdayMonth";
-            this.comboBoxGuessBirthdayMonth.Size = new System.Drawing.Size(121, 26);
+            this.comboBoxGuessBirthdayMonth.Size = new System.Drawing.Size(124, 26);
             this.comboBoxGuessBirthdayMonth.TabIndex = 69;
             this.comboBoxGuessBirthdayMonth.Text = "Select Month";
             this.comboBoxGuessBirthdayMonth.SelectedIndexChanged += new System.EventHandler(this.comboBoxGuessBirthdayMonth_SelectedIndexChanged);
@@ -438,7 +438,7 @@
             // labelPleaseWait
             // 
             this.labelPleaseWait.AutoSize = true;
-            this.labelPleaseWait.Location = new System.Drawing.Point(176, 133);
+            this.labelPleaseWait.Location = new System.Drawing.Point(183, 131);
             this.labelPleaseWait.Name = "labelPleaseWait";
             this.labelPleaseWait.Size = new System.Drawing.Size(95, 18);
             this.labelPleaseWait.TabIndex = 69;
@@ -469,7 +469,7 @@
             // 
             this.buttonNumberOfPostInPeriodOfTime.Enabled = false;
             this.buttonNumberOfPostInPeriodOfTime.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonNumberOfPostInPeriodOfTime.Location = new System.Drawing.Point(271, 82);
+            this.buttonNumberOfPostInPeriodOfTime.Location = new System.Drawing.Point(290, 82);
             this.buttonNumberOfPostInPeriodOfTime.Name = "buttonNumberOfPostInPeriodOfTime";
             this.buttonNumberOfPostInPeriodOfTime.Size = new System.Drawing.Size(101, 37);
             this.buttonNumberOfPostInPeriodOfTime.TabIndex = 58;
@@ -499,7 +499,7 @@
             "Last 12 Months",
             "Last Five Years",
             "Last Ten Years"});
-            this.comboBoxNumberOfPostPeriodsOfTime.Location = new System.Drawing.Point(62, 88);
+            this.comboBoxNumberOfPostPeriodsOfTime.Location = new System.Drawing.Point(73, 88);
             this.comboBoxNumberOfPostPeriodsOfTime.Name = "comboBoxNumberOfPostPeriodsOfTime";
             this.comboBoxNumberOfPostPeriodsOfTime.Size = new System.Drawing.Size(158, 26);
             this.comboBoxNumberOfPostPeriodsOfTime.TabIndex = 62;
@@ -529,15 +529,15 @@
             this.Text = "FacebookWinFormsApp";
             this.tabPage.ResumeLayout(false);
             this.tabPage.PerformLayout();
-            this.panel3.ResumeLayout(false);
-            this.panel3.PerformLayout();
-            this.panel2.ResumeLayout(false);
-            this.panel2.PerformLayout();
-            this.panel1.ResumeLayout(false);
-            this.panel1.PerformLayout();
+            this.panelBirthdayCounter.ResumeLayout(false);
+            this.panelBirthdayCounter.PerformLayout();
+            this.panelPostsGuesses.ResumeLayout(false);
+            this.panelPostsGuesses.PerformLayout();
+            this.panelMessageTextBox.ResumeLayout(false);
+            this.panelMessageTextBox.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.postBindingSource)).EndInit();
-            this.panelBirthday.ResumeLayout(false);
-            this.panelBirthday.PerformLayout();
+            this.panelBirthdayGuesses.ResumeLayout(false);
+            this.panelBirthdayGuesses.PerformLayout();
             this.panelPostsData.ResumeLayout(false);
             this.panelPostsData.PerformLayout();
             this.tabControl.ResumeLayout(false);
@@ -559,7 +559,7 @@
         private System.Windows.Forms.ComboBox comboBoxNumberOfPostPeriodsOfTime;
         private System.Windows.Forms.Label labelWinFormTitle;
         private System.Windows.Forms.Panel panelPostsData;
-        private System.Windows.Forms.Panel panelBirthday;
+        private System.Windows.Forms.Panel panelBirthdayGuesses;
         private System.Windows.Forms.Label labelBirthdayExplain;
         private System.Windows.Forms.Label labelNumberOfPostExplain;
         private System.Windows.Forms.Label labelFriendName;
@@ -575,12 +575,12 @@
         private System.Windows.Forms.Button buttonNewBirthdayGuess;
         private System.Windows.Forms.ListBox listBoxPhotos;
         private System.Windows.Forms.Button buttonShowPostsList;
-        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Panel panelMessageTextBox;
         private System.Windows.Forms.BindingSource postBindingSource;
-        private System.Windows.Forms.Panel panel3;
-        private System.Windows.Forms.Panel panel2;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Panel panelBirthdayCounter;
+        private System.Windows.Forms.Panel panelPostsGuesses;
+        private System.Windows.Forms.Label labelBirthdayGuesses;
+        private System.Windows.Forms.Label labelPostGuesses;
         private System.Windows.Forms.TextBox messageTextBox;
     }
 }
