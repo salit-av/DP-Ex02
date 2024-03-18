@@ -481,7 +481,7 @@
             // 
             this.labelNumberOfPostsInPeriodOfTime.AutoSize = true;
             this.labelNumberOfPostsInPeriodOfTime.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelNumberOfPostsInPeriodOfTime.Location = new System.Drawing.Point(115, 122);
+            this.labelNumberOfPostsInPeriodOfTime.Location = new System.Drawing.Point(145, 122);
             this.labelNumberOfPostsInPeriodOfTime.Name = "labelNumberOfPostsInPeriodOfTime";
             this.labelNumberOfPostsInPeriodOfTime.Size = new System.Drawing.Size(213, 31);
             this.labelNumberOfPostsInPeriodOfTime.TabIndex = 61;
