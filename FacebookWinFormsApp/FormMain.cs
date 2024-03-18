@@ -110,13 +110,7 @@ namespace BasicFacebookFeatures
             Invoke(new Action(() =>
             {
                 labelBirthdayCountdown.Visible = true;
-                labelBirthdayCountdown.Text = $"Time until next birthday: {timeSpan.Days} days, {timeSpan.Hours} hours, {timeSpan.Minutes} minutes.";
-
-                if (!m_IsUserGuessedFriendBirthday)
-                {
-                    showGuessBirthdayMonth();
-                    m_IsUserGuessedFriendBirthday = true;
-                }
+                labelBirthdayCountdown.Text = $"Time until next birthday: {i_TimeSpan.Days} days, {i_TimeSpan.Hours} hours, {i_TimeSpan.Minutes} minutes.";
             }));
         }
 
@@ -134,16 +128,16 @@ namespace BasicFacebookFeatures
             countPostsInBackground(selectedPeriodOption);
         }
 
-        private void CountPostsInBackground(string selectedPeriodOption)
+        private void countPostsInBackground(string selectedPeriodOption)
         {
             new Thread(() =>
             {
                 int postCount = m_FeatureFacade.CountPostsInPeriod(selectedPeriodOption);
-                UpdateUIAfterCountingPosts(postCount);
+                updateUIAfterCountingPosts(postCount);
             }).Start();
         }
 
-        private void UpdateUIAfterCountingPosts(int postCount)
+        private void updateUIAfterCountingPosts(int i_PostCount)
         {
             Invoke(new Action(() =>
             {
