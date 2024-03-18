@@ -12,8 +12,6 @@ namespace BasicFacebookFeatures
         private User m_FriendToGuess;
         private Post m_PostToGuess;
         private FeatureFacade m_FeatureFacade;
-        private bool m_IsUserGuessedPostYear = false;
-        private bool m_IsUserGuessedFriendBirthday = false;
 
         internal FormMain()
         {
@@ -39,8 +37,8 @@ namespace BasicFacebookFeatures
                         m_User = FacebookAuthenticationManager.Instance.m_LoggedInUser;
                         IBirthdayCountdownStrategy birthdayCountdownStrategy = new SimpleBirthdayCountdownStrategy();
                         IPostAnalyzerStrategy postAnalyzerStrategy = new SimplePostAnalyzerStrategy();
-
                         m_FeatureFacade = new FeatureFacade(m_User, birthdayCountdownStrategy, postAnalyzerStrategy);
+                        initRandomFriendAndPost();
 
                         buttonLogin.Text = $"Logged in as {m_User.Name}";
                         buttonLogin.BackColor = Color.LightGreen;
@@ -50,12 +48,24 @@ namespace BasicFacebookFeatures
             }
         }
 
+        private void initRandomFriendAndPost()
+        {
+            showGuessBirthdayMonth();
+            showGuessPostYear();
+        }
+
         private void enableButtonsAfterLogin()
         {
-            comboBoxNumberOfPostPeriodsOfTime.Enabled = true;
             buttonLogin.Enabled = false;
             buttonLogout.Enabled = true;
             buttonBirthdayCountdown.Enabled = true;
+            buttonNewBirthdayGuess.Enabled = true;
+            buttonNewPostGuess.Enabled = true;
+            buttonShowPostsList.Enabled = true;
+            comboBoxNumberOfPostPeriodsOfTime.Enabled = true;
+            comboBoxGuessBirthdayMonth.Enabled = true;
+            comboBoxGuessPostYear.Enabled = true;
+            checkBoxPostFromList.Enabled = true;
         }
 
         private void buttonLogout_Click(object sender, EventArgs e)
@@ -78,8 +88,13 @@ namespace BasicFacebookFeatures
             buttonLogin.Enabled = true;
             buttonLogout.Enabled = false;
             buttonBirthdayCountdown.Enabled = false;
-            buttonNumberOfPostInPeriodOfTime.Enabled = false;
+            buttonNewBirthdayGuess.Enabled = false;
+            buttonNewPostGuess.Enabled = false;
+            buttonShowPostsList.Enabled = false;
             comboBoxNumberOfPostPeriodsOfTime.Enabled = false;
+            comboBoxGuessBirthdayMonth.Enabled = false;
+            comboBoxGuessPostYear.Enabled = false;
+            checkBoxPostFromList.Enabled = false;
         }
 
         private void buttonBirthdayCounter_Click(object sender, EventArgs e)
@@ -97,12 +112,6 @@ namespace BasicFacebookFeatures
             {
                 labelBirthdayCountdown.Visible = true;
                 labelBirthdayCountdown.Text = $"Time until next birthday: {timeSpan.Days} days, {timeSpan.Hours} hours, {timeSpan.Minutes} minutes.";
-
-                if (!m_IsUserGuessedFriendBirthday)
-                {
-                    showGuessBirthdayMonth();
-                    m_IsUserGuessedFriendBirthday = true;
-                }
             }));
         }
 
@@ -110,66 +119,40 @@ namespace BasicFacebookFeatures
         {
             m_FriendToGuess = m_FeatureFacade.GetRandomFriend();
             labelFriendName.Text = (m_FriendToGuess == null) ? "No friends exists!" : m_FriendToGuess.Name;
-            visibleFormObjectsOfGuessFriendBirthdayMonth();
         }
 
-        private void visibleFormObjectsOfGuessFriendBirthdayMonth()
-        {
-            comboBoxGuessBirthdayMonth.Visible = true;
-            buttonGuessBirthdayMonth.Visible = true;
-            buttonNewBirthdayGuess.Visible = true;
-            labelGuessFriendBirthday.Visible = true;
-            labelFriendName.Visible = true;
-        }
         private void buttonNumberOfPostInPeriodOfTime_Click(object sender, EventArgs e)
         {
             string selectedPeriodOption = comboBoxNumberOfPostPeriodsOfTime.SelectedItem.ToString();
             labelPleaseWait.Visible = true;
             labelPleaseWait.Text = "Please wait...";
-            CountPostsInBackground(selectedPeriodOption);
+            countPostsInBackground(selectedPeriodOption);
         }
 
-        private void CountPostsInBackground(string selectedPeriodOption)
+        private void countPostsInBackground(string selectedPeriodOption)
         {
             new Thread(() =>
             {
                 int postCount = m_FeatureFacade.CountPostsInPeriod(selectedPeriodOption);
-                UpdateUIAfterCountingPosts(postCount);
+                updateUIAfterCountingPosts(postCount);
             }).Start();
         }
 
-        private void UpdateUIAfterCountingPosts(int postCount)
+        private void updateUIAfterCountingPosts(int postCount)
         {
             Invoke(new Action(() =>
             {
                 labelNumberOfPostsInPeriodOfTime.Visible = true;
                 labelNumberOfPostsInPeriodOfTime.Text = $"{postCount} posts found";
                 labelPleaseWait.Visible = false;
-
-                if (!m_IsUserGuessedPostYear)
-                {
-                    showGuessPostYear();
-                    m_IsUserGuessedPostYear = true;
-                }
             }));
         }
 
         private void showGuessPostYear()
         {
             m_PostToGuess = m_FeatureFacade.GetRandomPost();
-            visibleObejctsOfGuessPostYear();
-
             labelSelectedPost.Text = (m_PostToGuess == null) ? "No posts exists!" : m_PostToGuess.Message;
             labelSelectedPost.ForeColor = Color.Black;
-        }
-
-        private void visibleObejctsOfGuessPostYear()
-        {
-            labelGuessPost.Visible = true;
-            comboBoxGuessPostYear.Visible = true;
-            buttonGuessYear.Visible = true;
-            buttonNewPostGuess.Visible = true;
-            labelSelectedPost.Visible = true;
         }
 
         private void comboBoxStatistical_SelectedIndexChanged(object sender, EventArgs e)
@@ -195,6 +178,10 @@ namespace BasicFacebookFeatures
         private void processPostGuessYear()
         {
             string selectedYearOption = string.Empty;
+            if (checkBoxPostFromList.Checked)
+            {
+                m_PostToGuess = postBindingSource.Current as Post;
+            }
             bool hasPost = m_PostToGuess != null;
 
             Invoke(new Action(() =>
@@ -227,7 +214,7 @@ namespace BasicFacebookFeatures
                 {
                     m_PostToGuess = postToGuess;
                     labelSelectedPost.ForeColor = Color.Black;
-                    labelSelectedPost.Text = (m_PostToGuess == null) ? "No posts exists!" : m_PostToGuess.Message;
+                    messageTextBox.Text = (m_PostToGuess == null) ? "No posts exists!" : m_PostToGuess.Message;
                 }));
             }).Start();
         }
@@ -246,7 +233,6 @@ namespace BasicFacebookFeatures
                 }));
             }).Start();
         }
-
 
         private void buttonGuessBirthdayMonth_Click(object sender, EventArgs e)
         {
