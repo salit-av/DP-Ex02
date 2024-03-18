@@ -23,10 +23,10 @@ namespace BasicFacebookFeatures
             }
         }
 
-        internal bool Login(string iAppId, params string[] i_Permissions)
+        internal bool Login(string i_AppId, params string[] i_Permissions)
         {
             bool isLoginSucceeded = false;
-            m_LoginResult = FacebookService.Login(iAppId, i_Permissions);
+            m_LoginResult = FacebookService.Login(i_AppId, i_Permissions);
 
             if (!string.IsNullOrEmpty(m_LoginResult.AccessToken))
             {

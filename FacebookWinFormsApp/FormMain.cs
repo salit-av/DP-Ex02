@@ -39,6 +39,7 @@ namespace BasicFacebookFeatures
                         IBirthdayCountdownStrategy birthdayCountdownStrategy = new SimpleBirthdayCountdownStrategy();
                         IPostAnalyzerStrategy postAnalyzerStrategy = new SimplePostAnalyzerStrategy();
                         m_FeatureFacade = new FeatureFacade(m_User, birthdayCountdownStrategy, postAnalyzerStrategy);
+
                         initRandomFriendAndPost();
 
                         buttonLogin.Text = $"Logged in as {m_User.Name}";
@@ -51,8 +52,21 @@ namespace BasicFacebookFeatures
 
         private void initRandomFriendAndPost()
         {
-            showGuessBirthdayMonth();
-            showGuessPostYear();
+            new Thread(() =>
+            {
+                Invoke(new Action(() =>
+                {
+                    showGuessBirthdayMonth();
+                }));
+            }).Start();
+
+            new Thread(() =>
+            {
+                Invoke(new Action(() =>
+                {
+                    showGuessPostYear();
+                }));
+            }).Start();
         }
 
         private void enableButtonsAfterLogin()
