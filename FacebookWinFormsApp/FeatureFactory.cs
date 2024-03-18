@@ -4,9 +4,9 @@ namespace BasicFacebookFeatures
 {
     internal static class FeatureFactory
     {
-        internal static RandomSelector CreateRandomSelector(User user)
+        internal static RandomSelector CreateRandomSelector(User i_User)
         {
-            return new RandomSelector(user);
+            return new RandomSelector(i_User);
         }
 
         internal static MonthConverter CreateMonthConverter()
@@ -14,9 +14,9 @@ namespace BasicFacebookFeatures
             return new MonthConverter();
         }
 
-        internal static BirthdayFeature CreateBirthdayFeature(string birthday)
+        internal static BirthdayFeature CreateBirthdayFeature(string i_Birthday)
         {
-            return new BirthdayFeature(birthday);
+            return new BirthdayFeature(i_Birthday);
         }
     }
 }

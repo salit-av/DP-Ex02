@@ -101,16 +101,22 @@ namespace BasicFacebookFeatures
             new Thread(() =>
             {
                 TimeSpan timeSpan = m_FeatureFacade.GetTimeUntilNextBirthday();
-                UpdateUIAfterBirthdayCalculation(timeSpan);
+                updateUIAfterBirthdayCalculation(timeSpan);
             }).Start();
         }
 
-        private void UpdateUIAfterBirthdayCalculation(TimeSpan timeSpan)
+        private void updateUIAfterBirthdayCalculation(TimeSpan i_TimeSpan)
         {
             Invoke(new Action(() =>
             {
                 labelBirthdayCountdown.Visible = true;
                 labelBirthdayCountdown.Text = $"Time until next birthday: {timeSpan.Days} days, {timeSpan.Hours} hours, {timeSpan.Minutes} minutes.";
+
+                if (!m_IsUserGuessedFriendBirthday)
+                {
+                    showGuessBirthdayMonth();
+                    m_IsUserGuessedFriendBirthday = true;
+                }
             }));
         }
 
@@ -128,21 +134,21 @@ namespace BasicFacebookFeatures
             countPostsInBackground(selectedPeriodOption);
         }
 
-        private void countPostsInBackground(string selectedPeriodOption)
+        private void CountPostsInBackground(string selectedPeriodOption)
         {
             new Thread(() =>
             {
                 int postCount = m_FeatureFacade.CountPostsInPeriod(selectedPeriodOption);
-                updateUIAfterCountingPosts(postCount);
+                UpdateUIAfterCountingPosts(postCount);
             }).Start();
         }
 
-        private void updateUIAfterCountingPosts(int postCount)
+        private void UpdateUIAfterCountingPosts(int postCount)
         {
             Invoke(new Action(() =>
             {
                 labelNumberOfPostsInPeriodOfTime.Visible = true;
-                labelNumberOfPostsInPeriodOfTime.Text = $"{postCount} posts found";
+                labelNumberOfPostsInPeriodOfTime.Text = $"{i_PostCount} posts found";
                 labelPleaseWait.Visible = false;
             }));
         }
