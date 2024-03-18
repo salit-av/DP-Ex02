@@ -368,7 +368,6 @@
             this.labelFriendName.TabIndex = 69;
             this.labelFriendName.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             this.labelFriendName.UseWaitCursor = true;
-            this.labelFriendName.Visible = false;
             // 
             // buttonGuessBirthdayMonth
             // 
