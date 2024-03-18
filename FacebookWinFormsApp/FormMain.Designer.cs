@@ -28,7 +28,17 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
+            System.Windows.Forms.Label createdTimeLabel;
+            System.Windows.Forms.Label linkLabel;
             this.tabPage = new System.Windows.Forms.TabPage();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.createdTimeLabel1 = new System.Windows.Forms.Label();
+            this.postBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.linkLabel1 = new System.Windows.Forms.Label();
+            this.messageTextBox = new System.Windows.Forms.TextBox();
+            this.buttonShowPostsList = new System.Windows.Forms.Button();
+            this.listBoxPhotos = new System.Windows.Forms.ListBox();
             this.labelWinFormTitle = new System.Windows.Forms.Label();
             this.buttonLogout = new System.Windows.Forms.Button();
             this.buttonLogin = new System.Windows.Forms.Button();
@@ -55,15 +65,40 @@
             this.labelNumberOfPostsInPeriodOfTime = new System.Windows.Forms.Label();
             this.comboBoxNumberOfPostPeriodsOfTime = new System.Windows.Forms.ComboBox();
             this.tabControl = new System.Windows.Forms.TabControl();
+            createdTimeLabel = new System.Windows.Forms.Label();
+            linkLabel = new System.Windows.Forms.Label();
             this.tabPage.SuspendLayout();
+            this.panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.postBindingSource)).BeginInit();
             this.panelBirthday.SuspendLayout();
             this.panelPostsData.SuspendLayout();
             this.tabControl.SuspendLayout();
             this.SuspendLayout();
             // 
+            // createdTimeLabel
+            // 
+            createdTimeLabel.AutoSize = true;
+            createdTimeLabel.Location = new System.Drawing.Point(110, 151);
+            createdTimeLabel.Name = "createdTimeLabel";
+            createdTimeLabel.Size = new System.Drawing.Size(101, 18);
+            createdTimeLabel.TabIndex = 0;
+            createdTimeLabel.Text = "Created Time:";
+            // 
+            // linkLabel
+            // 
+            linkLabel.AutoSize = true;
+            linkLabel.Location = new System.Drawing.Point(110, 174);
+            linkLabel.Name = "linkLabel";
+            linkLabel.Size = new System.Drawing.Size(39, 18);
+            linkLabel.TabIndex = 2;
+            linkLabel.Text = "Link:";
+            // 
             // tabPage
             // 
             this.tabPage.BackColor = System.Drawing.Color.LightCyan;
+            this.tabPage.Controls.Add(this.panel1);
+            this.tabPage.Controls.Add(this.buttonShowPostsList);
+            this.tabPage.Controls.Add(this.listBoxPhotos);
             this.tabPage.Controls.Add(this.labelWinFormTitle);
             this.tabPage.Controls.Add(this.buttonLogout);
             this.tabPage.Controls.Add(this.buttonLogin);
@@ -75,6 +110,70 @@
             this.tabPage.Size = new System.Drawing.Size(1235, 666);
             this.tabPage.TabIndex = 0;
             this.tabPage.Text = "FacebookWinFormsApp";
+            // 
+            // panel1
+            // 
+            this.panel1.Controls.Add(createdTimeLabel);
+            this.panel1.Controls.Add(this.createdTimeLabel1);
+            this.panel1.Controls.Add(linkLabel);
+            this.panel1.Controls.Add(this.linkLabel1);
+            this.panel1.Controls.Add(this.messageTextBox);
+            this.panel1.Location = new System.Drawing.Point(483, 373);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(428, 221);
+            this.panel1.TabIndex = 68;
+            // 
+            // createdTimeLabel1
+            // 
+            this.createdTimeLabel1.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.postBindingSource, "CreatedTime", true));
+            this.createdTimeLabel1.Location = new System.Drawing.Point(217, 151);
+            this.createdTimeLabel1.Name = "createdTimeLabel1";
+            this.createdTimeLabel1.Size = new System.Drawing.Size(100, 23);
+            this.createdTimeLabel1.TabIndex = 1;
+            this.createdTimeLabel1.Text = "label1";
+            // 
+            // postBindingSource
+            // 
+            this.postBindingSource.DataSource = typeof(FacebookWrapper.ObjectModel.Post);
+            // 
+            // linkLabel1
+            // 
+            this.linkLabel1.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.postBindingSource, "Link", true));
+            this.linkLabel1.Location = new System.Drawing.Point(217, 174);
+            this.linkLabel1.Name = "linkLabel1";
+            this.linkLabel1.Size = new System.Drawing.Size(100, 23);
+            this.linkLabel1.TabIndex = 3;
+            this.linkLabel1.Text = "label1";
+            // 
+            // messageTextBox
+            // 
+            this.messageTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.postBindingSource, "Message", true));
+            this.messageTextBox.Location = new System.Drawing.Point(86, 3);
+            this.messageTextBox.Multiline = true;
+            this.messageTextBox.Name = "messageTextBox";
+            this.messageTextBox.Size = new System.Drawing.Size(187, 145);
+            this.messageTextBox.TabIndex = 5;
+            // 
+            // buttonShowPostsList
+            // 
+            this.buttonShowPostsList.Location = new System.Drawing.Point(720, 167);
+            this.buttonShowPostsList.Name = "buttonShowPostsList";
+            this.buttonShowPostsList.Size = new System.Drawing.Size(161, 32);
+            this.buttonShowPostsList.TabIndex = 67;
+            this.buttonShowPostsList.Text = "Show posts list";
+            this.buttonShowPostsList.UseVisualStyleBackColor = true;
+            this.buttonShowPostsList.Click += new System.EventHandler(this.buttonShowPostsList_Click);
+            // 
+            // listBoxPhotos
+            // 
+            this.listBoxPhotos.DataSource = this.postBindingSource;
+            this.listBoxPhotos.DisplayMember = "Message";
+            this.listBoxPhotos.FormattingEnabled = true;
+            this.listBoxPhotos.ItemHeight = 18;
+            this.listBoxPhotos.Location = new System.Drawing.Point(457, 145);
+            this.listBoxPhotos.Name = "listBoxPhotos";
+            this.listBoxPhotos.Size = new System.Drawing.Size(212, 184);
+            this.listBoxPhotos.TabIndex = 66;
             // 
             // labelWinFormTitle
             // 
@@ -123,9 +222,9 @@
             this.panelBirthday.Controls.Add(this.labelBirthdayTitle);
             this.panelBirthday.Controls.Add(this.labelBirthdayCountdown);
             this.panelBirthday.Controls.Add(this.buttonBirthdayCountdown);
-            this.panelBirthday.Location = new System.Drawing.Point(635, 114);
+            this.panelBirthday.Location = new System.Drawing.Point(940, 114);
             this.panelBirthday.Name = "panelBirthday";
-            this.panelBirthday.Size = new System.Drawing.Size(581, 533);
+            this.panelBirthday.Size = new System.Drawing.Size(276, 511);
             this.panelBirthday.TabIndex = 64;
             // 
             // buttonNewBirthdayGuess
@@ -261,7 +360,7 @@
             this.panelPostsData.Controls.Add(this.comboBoxNumberOfPostPeriodsOfTime);
             this.panelPostsData.Location = new System.Drawing.Point(18, 114);
             this.panelPostsData.Name = "panelPostsData";
-            this.panelPostsData.Size = new System.Drawing.Size(581, 533);
+            this.panelPostsData.Size = new System.Drawing.Size(334, 533);
             this.panelPostsData.TabIndex = 65;
             // 
             // buttonNewPostGuess
@@ -429,6 +528,9 @@
             this.Text = "FacebookWinFormsApp";
             this.tabPage.ResumeLayout(false);
             this.tabPage.PerformLayout();
+            this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.postBindingSource)).EndInit();
             this.panelBirthday.ResumeLayout(false);
             this.panelBirthday.PerformLayout();
             this.panelPostsData.ResumeLayout(false);
@@ -466,5 +568,12 @@
         private System.Windows.Forms.Label labelPleaseWait;
         private System.Windows.Forms.Button buttonNewPostGuess;
         private System.Windows.Forms.Button buttonNewBirthdayGuess;
+        private System.Windows.Forms.ListBox listBoxPhotos;
+        private System.Windows.Forms.Button buttonShowPostsList;
+        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.BindingSource postBindingSource;
+        private System.Windows.Forms.Label createdTimeLabel1;
+        private System.Windows.Forms.Label linkLabel1;
+        private System.Windows.Forms.TextBox messageTextBox;
     }
 }

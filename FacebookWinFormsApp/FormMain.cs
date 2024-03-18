@@ -264,5 +264,10 @@ namespace BasicFacebookFeatures
                 }));
             }
         }
+
+        private void buttonShowPostsList_Click(object sender, EventArgs e)
+        {
+            postBindingSource.DataSource = m_User.Posts;
+        }
     }
 }
