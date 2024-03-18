@@ -9,11 +9,11 @@ namespace BasicFacebookFeatures
         private IBirthdayCountdownStrategy m_BirthdayCountdownStrategy;
         private IPostAnalyzerStrategy m_PostAnalyzerStrategy;
 
-        public FeatureFacade(User user, IBirthdayCountdownStrategy birthdayCountdownStrategy, IPostAnalyzerStrategy postAnalyzerStrategy)
+        public FeatureFacade(User i_User, IBirthdayCountdownStrategy i_BirthdayCountdownStrategy, IPostAnalyzerStrategy i_PostAnalyzerStrategy)
         {
-            m_User = user;
-            m_BirthdayCountdownStrategy = birthdayCountdownStrategy;
-            m_PostAnalyzerStrategy = postAnalyzerStrategy;
+            m_User = i_User;
+            m_BirthdayCountdownStrategy = i_BirthdayCountdownStrategy;
+            m_PostAnalyzerStrategy = i_PostAnalyzerStrategy;
         }
 
         public TimeSpan GetTimeUntilNextBirthday()
@@ -21,9 +21,9 @@ namespace BasicFacebookFeatures
             return m_BirthdayCountdownStrategy.GetTimeUntilNextBirthday(m_User.Birthday);
         }
 
-        public int CountPostsInPeriod(string period)
+        public int CountPostsInPeriod(string i_Period)
         {
-            return m_PostAnalyzerStrategy.CountPostsInPeriod(period);
+            return m_PostAnalyzerStrategy.CountPostsInPeriod(i_Period);
         }
 
         public User GetRandomFriend()
@@ -38,10 +38,10 @@ namespace BasicFacebookFeatures
             return randomSelector.GetRandomPost();
         }
 
-        public int ConvertMonthStringToInt(string month)
+        public int ConvertMonthStringToInt(string i_Month)
         {
             MonthConverter monthConverter = FeatureFactory.CreateMonthConverter();
-            return monthConverter.GetMonthNumber(month);
+            return monthConverter.GetMonthNumber(i_Month);
         }
     }
 }

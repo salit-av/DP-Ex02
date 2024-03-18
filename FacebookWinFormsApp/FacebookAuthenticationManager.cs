@@ -9,11 +9,8 @@ namespace BasicFacebookFeatures
         private LoginResult m_LoginResult;
         internal User m_LoggedInUser { get; private set; }
 
-        // Make the constructor private so it cannot be
-        // instantiated outside of the class.
         private FacebookAuthenticationManager() { }
 
-        // Public static means of getting the singleton instance.
         public static FacebookAuthenticationManager Instance
         {
             get
@@ -26,10 +23,10 @@ namespace BasicFacebookFeatures
             }
         }
 
-        internal bool Login(string appId, params string[] permissions)
+        internal bool Login(string iAppId, params string[] i_Permissions)
         {
             bool isLoginSucceeded = false;
-            m_LoginResult = FacebookService.Login(appId, permissions);
+            m_LoginResult = FacebookService.Login(iAppId, i_Permissions);
 
             if (!string.IsNullOrEmpty(m_LoginResult.AccessToken))
             {

@@ -2,32 +2,27 @@
 
 namespace BasicFacebookFeatures
 {
-    // Define interfaces for each feature's strategy
     public interface IBirthdayCountdownStrategy
     {
-        TimeSpan GetTimeUntilNextBirthday(string birthday);
+        TimeSpan GetTimeUntilNextBirthday(string i_Birthday);
     }
 
-    // Implement concrete strategies
     public class SimpleBirthdayCountdownStrategy : IBirthdayCountdownStrategy
     {
-        public TimeSpan GetTimeUntilNextBirthday(string birthday)
+        public TimeSpan GetTimeUntilNextBirthday(string i_Birthday)
         {
-            // Implement simple countdown logic
-            return CalculateTimeUntilNextBirthday(birthday);
+            return calculateTimeUntilNextBirthday(i_Birthday);
         }
 
-        private TimeSpan CalculateTimeUntilNextBirthday(string birthday)
+        private TimeSpan calculateTimeUntilNextBirthday(string i_Birthday)
         {
-            // Parse the birthday string
-            string[] birthdayDivide = birthday.Split('/');
+            string[] birthdayDivide = i_Birthday.Split('/');
 
             if (birthdayDivide.Length == 2 || birthdayDivide.Length == 3)
             {
                 int month = int.Parse(birthdayDivide[0]);
                 int day = int.Parse(birthdayDivide[1]);
 
-                // Calculate next birthday
                 DateTime nextBirthday;
                 if (month == 2 && day == 29)
                 {

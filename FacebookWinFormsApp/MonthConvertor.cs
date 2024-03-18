@@ -7,10 +7,10 @@ namespace BasicFacebookFeatures
     {
         internal MonthConverter() { }
 
-        internal int GetMonthNumber(string monthName)
+        internal int GetMonthNumber(string i_MonthName)
         {
             DateTimeFormatInfo formatInfo = DateTimeFormatInfo.InvariantInfo;
-            DateTime date = DateTime.ParseExact(monthName, "MMMM", formatInfo);
+            DateTime date = DateTime.ParseExact(i_MonthName, "MMMM", formatInfo);
             return date.Month;
         }
     }

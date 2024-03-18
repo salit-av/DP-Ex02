@@ -87,16 +87,16 @@ namespace BasicFacebookFeatures
             new Thread(() =>
             {
                 TimeSpan timeSpan = m_FeatureFacade.GetTimeUntilNextBirthday();
-                UpdateUIAfterBirthdayCalculation(timeSpan);
+                updateUIAfterBirthdayCalculation(timeSpan);
             }).Start();
         }
 
-        private void UpdateUIAfterBirthdayCalculation(TimeSpan timeSpan)
+        private void updateUIAfterBirthdayCalculation(TimeSpan i_TimeSpan)
         {
             Invoke(new Action(() =>
             {
                 labelBirthdayCountdown.Visible = true;
-                labelBirthdayCountdown.Text = $"Time until next birthday: {timeSpan.Days} days, {timeSpan.Hours} hours, {timeSpan.Minutes} minutes.";
+                labelBirthdayCountdown.Text = $"Time until next birthday: {i_TimeSpan.Days} days, {i_TimeSpan.Hours} hours, {i_TimeSpan.Minutes} minutes.";
 
                 if (!m_IsUserGuessedFriendBirthday)
                 {
@@ -126,24 +126,24 @@ namespace BasicFacebookFeatures
             string selectedPeriodOption = comboBoxNumberOfPostPeriodsOfTime.SelectedItem.ToString();
             labelPleaseWait.Visible = true;
             labelPleaseWait.Text = "Please wait...";
-            CountPostsInBackground(selectedPeriodOption);
+            countPostsInBackground(selectedPeriodOption);
         }
 
-        private void CountPostsInBackground(string selectedPeriodOption)
+        private void countPostsInBackground(string i_SelectedPeriodOption)
         {
             new Thread(() =>
             {
-                int postCount = m_FeatureFacade.CountPostsInPeriod(selectedPeriodOption);
-                UpdateUIAfterCountingPosts(postCount);
+                int postCount = m_FeatureFacade.CountPostsInPeriod(i_SelectedPeriodOption);
+                updateUIAfterCountingPosts(postCount);
             }).Start();
         }
 
-        private void UpdateUIAfterCountingPosts(int postCount)
+        private void updateUIAfterCountingPosts(int i_PostCount)
         {
             Invoke(new Action(() =>
             {
                 labelNumberOfPostsInPeriodOfTime.Visible = true;
-                labelNumberOfPostsInPeriodOfTime.Text = $"{postCount} posts found";
+                labelNumberOfPostsInPeriodOfTime.Text = $"{i_PostCount} posts found";
                 labelPleaseWait.Visible = false;
 
                 if (!m_IsUserGuessedPostYear)
@@ -246,7 +246,6 @@ namespace BasicFacebookFeatures
                 }));
             }).Start();
         }
-
 
         private void buttonGuessBirthdayMonth_Click(object sender, EventArgs e)
         {
